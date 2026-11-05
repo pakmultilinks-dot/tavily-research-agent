@@ -1,0 +1,1 @@
+We are honest about the limits. The snippets are short extracts from the Tavily Playground, and the direct Tavily API route still returns an error in this environment, so the live data here comes from the Playground, not a direct API call. Nothing in these briefings is invented.

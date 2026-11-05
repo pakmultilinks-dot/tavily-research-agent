@@ -220,3 +220,48 @@ on top of the same pipeline without changing the core logic.
 - Next steps, in order: 2-minute demo video (use the live
   Playground briefings, never fixture output as if live),
   HackCulture submission before Nov 15, 2026, 11:59 PM PKT.
+
+## Demo video, 2026-11-05
+
+- File: demo-video.mp4, 4.2 MB, 117.3 seconds, 1920x1080,
+  H.264 video plus AAC audio, faststart. Verified with ffprobe:
+  one video stream, one audio stream, duration 117.30s.
+- Method: REAL screen recording, not a slideshow. A tkinter demo
+  window was driven live under Xvfb at 1920x1080 and recorded
+  with ffmpeg x11grab at 30 fps, while the real CLI run
+  (build_playground_briefings.py) streamed its real output, the
+  real unit tests ran, and page 1 of the three real briefing PDFs
+  scrolled on screen. Voiceover was synthesized with the tts tool
+  (Helio voice) from a 279-word script in demo_assets/narration.txt,
+  7 segments, 117.3 seconds total, with 0.7 second gaps between
+  segments. Silence check: no silent stretch longer than 2 seconds.
+- Narration summary: the meeting problem, how the agent works
+  (30-day window, news, launches, hires, funding), the live run
+  rebuilding briefings from 60 real Tavily results, the kept counts
+  (OpenAI 14, Google 15, Microsoft 8) with named examples, the
+  architecture and 12 passing tests, the honest limits (short
+  Playground snippets, direct API route still 401), and the public
+  GitHub repo plus close.
+- Live briefings only: the fixture sample is never shown as live.
+  The Playground source is stated in the narration and visible on
+  screen in the briefing PDF pages.
+- Frame check: 9 frames sampled across all 7 scenes and viewed.
+  Titles match the narration playing at that time, no text overlaps,
+  no em-dash on screen. Two small imperfections, both visible in
+  the frames: the briefing list in scene 4 shows raw markdown
+  ** markers around development titles (the rendered PDF pages
+  later in the same scene show them properly), and a small mouse
+  I-beam cursor sits near the centre of the dark scenes.
+- One recording attempt failed first (a Tkinter callback race
+  cut a PDF scroll short); the race was fixed by driving scene
+  animations with time.sleep plus update_idletasks instead of
+  root.update, and the final recording ran clean with all 7 scenes
+  on schedule and no errors.
+- Reproduce: demo_assets/demo_player.py, timeline and narration
+  are in demo_assets/. The live briefing PDFs were restored to
+  their committed versions after the on-screen rebuild, so the
+  repo working tree shows only demo-video.mp4 and demo_assets/
+  as untracked.
+- NOT pushed to GitHub yet in this task. The parent will push the
+  video after verifying it, then it can be added to the saved
+  HackCulture submission via Edit before the final submit.

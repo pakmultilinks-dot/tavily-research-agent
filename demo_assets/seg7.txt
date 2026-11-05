@@ -1,0 +1,1 @@
+Under the hood, it is a small Python app. A command line tool and a web interface share one pipeline: dates, filtering, deduplication, and rendering. Twelve unit tests cover that pipeline, and they all pass.
