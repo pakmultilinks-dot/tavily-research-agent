@@ -1,0 +1,611 @@
+{
+  "source": "Tavily API Playground, app.tavily.com/playground, 2026-11-05, signed in as pakmultilinks@gmail.com, Researcher plan. Search, topic news, search_depth basic, max_results 5, time_range month, Include published date checked. Browser task ran 13:46-13:50 PKT Nov 5, 2026. All 12 searches returned 5 results each, 60 total, none failed.",
+  "meeting_date": "2026-11-05",
+  "window": {
+    "start": "2026-10-06",
+    "end": "2026-11-05"
+  },
+  "note": "Titles, URLs and snippets are transcribed EXACTLY as shown in the Playground JSON view, including trailing '...' where the Playground truncated them. A result is marked truncated=true when its recorded title, URL or content ends with '...' or is visibly cut mid-word or mid-sentence. published_date is null where the Playground showed no published_date field (Tavily knowledge-company pages). Nothing here is expanded, completed, or guessed. One character change was made to every transcribed title and snippet: the em-dash character as shown by the Playground was replaced with a plain hyphen, per the standing project rule that the em-dash never appears in project output. Nothing else was altered.",
+  "results": [
+    {
+      "company": "OpenAI",
+      "category": "news",
+      "title": "OpenAI",
+      "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+      "published_date": null,
+      "content": "# OpenAI ID: p4PyTakV77G9 Website: www.openai.com Headquarters: San Francisco, CA, United States LinkedIn: www.linkedin.com/company/openai · 11,529,792 followers Industry: Research Services Industry codes: SIC 87, 873, NAICS 54, 541 Company type: Partnership Social profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai",
+      "truncated": false,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "news",
+      "title": "Introducing the Grid Protectors Program",
+      "url": "https://openai.com/index/grid-protectors-program",
+      "published_date": "Tue, 03 Nov 2026 08:00:00 GMT",
+      "content": "Building AI infrastructure with the Effingham County community Global Affairs Jul 22, 2026 Image 2: ...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "news",
+      "title": "OpenAI to acquire Pierre Computer Company, Inc.",
+      "url": "https://openai.com/index/openai-to-acquire-pierre",
+      "published_date": "Wed, 04 Nov 2026 14:00:00 GMT",
+      "content": "Today we're announcing that OpenAI will acquire Pierre Computer Company, Inc(opens in a new window).",
+      "truncated": false,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "news",
+      "title": "OpenAI appoints Jill Hazelbaker as Chief Corporate Affairs Officer",
+      "url": "https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer",
+      "published_date": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "content": "Image 3: David Vélez and Robin Vince 1x1 David Vélez and Robin Vince join OpenAI boards Company Jul",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "news",
+      "title": "OpenAI appoints Dan Driscoll as Senior Counselor for National Security",
+      "url": "https://openai.com/index/dan-driscoll-joins-openai",
+      "published_date": "Tue, 03 Nov 2026 08:00:00 GMT",
+      "content": "2026 Global Affairs ## Author OpenAI ## Keep reading View all Image 1: Strengthening Democratic O...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "launches",
+      "title": "OpenAI launches GPT-6 and Intelligent UI in ChatGPT",
+      "url": "https://qz.com/openai-chatgpt-gpt-6-intelligent-ui-interactive-visuals-100826",
+      "published_date": "Thu, 08 Oct 2026 13:17:42 GMT",
+      "content": "OpenAI is introducing Intelligent UI, a ChatGPT feature that gives the chatbot the abilit...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "launches",
+      "title": "OpenAI Updates ChatGPT Ads Manager with Daily Budgets Tool",
+      "url": "https://www.thekeyword.co/news/openai-chatgpt-ads-manager-daily-budgets",
+      "published_date": "Fri, 16 Oct 2026 06:00:00 GMT",
+      "content": "The launch included CPC and CPM bidding models, along with Conversions API and pixel trac...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "launches",
+      "title": "OpenAI Launches Rosalind Academic Plan for U.S. University Labs – Unite.AI",
+      "url": "https://www.unite.ai/openai-launches-rosalind-academic-plan-for-u-s-university-labs",
+      "published_date": "Thu, 15 Oct 2026 21:32:09 GMT",
+      "content": "My Feed\n\n### AI Models & Platforms\n\n# OpenAI Launches Rosalind Academic Plan for U.S.",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "launches",
+      "title": "OpenAI Rolls Out GPT-6 Intelligent UI With Charts and Forms",
+      "url": "https://www.techrepublic.com/article/news-gpt-6-intelligent-ui-charts-forms",
+      "published_date": "Thu, 08 Oct 2026 16:16:43 GMT",
+      "content": "OpenAI’s October 7 announcement listed Plus, Pro, Business, and Enterprise as the first p...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "launches",
+      "title": "OpenAI",
+      "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+      "published_date": null,
+      "content": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, Uni...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "hires",
+      "title": "OpenAI hones public sector focus with new leadership hires - Nextgov/FCW",
+      "url": "https://www.nextgov.com/people/2026/11/openai-hones-public-sector-focus-new-leadership-hires/417047?",
+      "published_date": "Wed, 04 Nov 2026 18:32:00 GMT",
+      "content": "OpenAI hired Yvette Cesario to be its new head of national security. Cesario formerly wor...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "hires",
+      "title": "OpenAI Hires Former AWS Partner Sales Leader To Drive AI Channel Growth",
+      "url": "https://www.crn.com/news/ai/2026/openai-hires-former-aws-partner-sales-leader-to-drive-ai-channel-growth",
+      "published_date": "Thu, 22 Oct 2026 09:50:00 GMT",
+      "content": "Guillen adds to OpenAI’s growing partner executive leadership team hailing from cloud pro...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "hires",
+      "title": "OpenAI hones public sector focus with new leadership hires - Yvette Kirk | LinkedIn",
+      "url": "https://www.linkedin.com/posts/yvettekirk_openai-hones-public-sector-focus-with-new-activity-7523871",
+      "published_date": "Wed, 04 Nov 2026 22:00:00 GMT",
+      "content": "I could not be more excited to welcome Yvette Cesario, Jamil Jaffer, and Peter Guerra to...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "hires",
+      "title": "OpenAI appoints Jill Hazelbaker as Chief Corporate Affairs Officer",
+      "url": "https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer",
+      "published_date": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "content": "Image 3: David Vélez and Robin Vince 1x1 David Vélez and Robin Vince join OpenAI boards Company Jul",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "hires",
+      "title": "OpenAI appoints Dan Driscoll as Senior Counselor for National Security",
+      "url": "https://openai.com/index/dan-driscoll-joins-openai",
+      "published_date": "Tue, 03 Nov 2026 08:00:00 GMT",
+      "content": "2026 Global Affairs ## Author OpenAI ## Keep reading View all Image 1: Strengthening Democratic O...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "funding",
+      "title": "How Much Did OpenAI Raise? Funding & Key Investors | Clay",
+      "url": "https://www.clay.com/dossier/openai-funding",
+      "published_date": "Fri, 30 Oct 2026 16:00:00 GMT",
+      "content": "## How Much Funding Has OpenAI Raised? [...] All articles – Dossier\n\n/\n\nHow Much Did",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "funding",
+      "title": "OpenAI reportedly lowers funding target for new round | TechCrunch",
+      "url": "https://techcrunch.com/2026/10/31/openai-reportedly-lowers-funding-target-for-new-round",
+      "published_date": "Sat, 31 Oct 2026 16:12:55 GMT",
+      "content": "Posted:\n\n# OpenAI reportedly lowers funding target for new round\n\nOpenAI’s latest fun...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "funding",
+      "title": "OpenAI Shifts Value to $1.25 Trillion as Funding Talks Finalize - Bloomberg",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-22/openai-shifts-value-to-1-25-trillion-as-funding-t...",
+      "published_date": "Thu, 22 Oct 2026 23:31:57 GMT",
+      "content": "# OpenAI Shifts Value to $1.25 Trillion as Funding Talks Finalize\n\n## Takeaways by Bloo...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "OpenAI",
+      "category": "funding",
+      "title": "OpenAI Funding Round: $30B at $1.25T Value [2026]",
+      "url": "https://tech-insider.org/openai-30b-funding-round-1-25t-valuation-ipo-2026",
+      "published_date": "Fri, 23 Oct 2026 04:37:27 GMT",
+      "content": "Add Tech Insider once in the Google app and our stories appear in your news suggestions.",
+      "truncated": false,
+      "url_truncated": false
+    },
+    {
+      "company": "OpenAI",
+      "category": "funding",
+      "title": "OpenAI",
+      "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+      "published_date": null,
+      "content": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, Uni...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "news",
+      "title": "Google’s News AI pilot expands to over 400 publications, including U.S. local news outlets",
+      "url": "https://www.niemanlab.org/2026/10/googles-news-ai-pilot-expands-to-over-400-publications-including-u...",
+      "published_date": "Thu, 15 Oct 2026 00:00:00 GMT",
+      "content": "Nieman Lab \n\nLicensed news content is used for experimental AI features, including audi...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Google",
+      "category": "news",
+      "title": "Rochester business group backs Google's controversial Pine Island data center | MPR News",
+      "url": "https://www.mprnews.org/story/2026/10/11/rochester-business-group-backs-googles-controversial-pine-i...",
+      "published_date": "Sun, 11 Oct 2026 09:00:00 GMT",
+      "content": "MPR News daily newsletter\n\n## News you can use in your inbox\n\nWhen it comes to stayin...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Google",
+      "category": "news",
+      "title": "GOOGLE NEWS US: Three news items about Bullying Sin Fronteras appear within a matter of hou...",
+      "url": "https://bullyingsinfronteras.blogspot.com/2026/10/google-news-united-states-three-news.html",
+      "published_date": "Wed, 28 Oct 2026 01:00:00 GMT",
+      "content": "Ir al contenido principal \n\nOrganización Mundial Bullying Sin Fronteras \n\n# Organizac...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "news",
+      "title": "Google will cut off search access for students at schools that reject AI tools - ABC News",
+      "url": "https://abcnews.com/US/wireStory/google-cut-off-search-access-students-schools-reject-137823026",
+      "published_date": "Tue, 03 Nov 2026 21:31:56 GMT",
+      "content": "## Parents and 2 young children among victims of Learjet crash in Florida, family says\n\n...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "news",
+      "title": "Google to end search access for schools that block its AI tools, sparking backlash - CBS News",
+      "url": "https://www.cbsnews.com/news/google-search-access-schools-ai-tools",
+      "published_date": "Tue, 03 Nov 2026 21:03:12 GMT",
+      "content": "Watch CBS News\n\n# Google to end search access for schools that block its AI tools, spar...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "launches",
+      "title": "Google introduces shopping updates ahead of the holidays",
+      "url": "https://www.socialmediatoday.com/news/google-introduces-shopping-updates-ahead-of-the-holidays/83330",
+      "published_date": "Sun, 18 Oct 2026 16:50:14 GMT",
+      "content": "Google launched some interesting new shopping products last week, which could have an imp...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "launches",
+      "title": "The latest AI-powered martech news and releases",
+      "url": "https://martech.org/the-latest-ai-powered-martech-news-and-releases",
+      "published_date": "Thu, 29 Oct 2026 14:55:10 GMT",
+      "content": "Krea launched Krea 3 to generate and edit 2K resolution images. It processes natural-lang...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "launches",
+      "title": "Google launches Gemini AI workplace agent that can write code and run tasks, company says",
+      "url": "https://www.cbsnews.com/news/google-gemini-ai-workplace-agent",
+      "published_date": "Thu, 08 Oct 2026 20:32:17 GMT",
+      "content": "Called Gemini, the AI is a \"universal agent\" that can write and run code, create images...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "launches",
+      "title": "Google Launches Gemini AI Workplace Agent That Can Write Code And Run Tasks, Company Says",
+      "url": "https://patch.com/california/walnutcreek/google-launches-gemini-ai-workplace-agent-can-write-code-ru...",
+      "published_date": "Fri, 09 Oct 2026 18:11:20 GMT",
+      "content": "Called Gemini, the AI is a \"universal agent\" that can write and run code, create images...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Google",
+      "category": "launches",
+      "title": "Google launches its ‘universal’ online shopping cart | The Verge",
+      "url": "https://www.theverge.com/tech/1011797/google-ai-universal-cart-shopping-tool-launch",
+      "published_date": "Thu, 15 Oct 2026 13:00:00 GMT",
+      "content": "# Google launches its ‘universal’ online shopping cart ahead of the holidays\n\nThe AI sh... [...] Google’s intelligent AI shopping cart is finally here, and just in time to tempt users into Bl...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "hires",
+      "title": "Citi hires Google's director of engineering, shuffles AI leaders | American Banker",
+      "url": "https://www.americanbanker.com/news/citi-hires-googles-director-of-engineering-shuffles-ai-leaders",
+      "published_date": "Mon, 19 Oct 2026 15:47:58 GMT",
+      "content": "Key insight: Citi has hired Google's director of engineering to oversee development of ag...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "hires",
+      "title": "Enablement Leader, Google Public Sector - Google Careers",
+      "url": "https://www.google.com/about/careers/applications/jobs/results/73630857255887558-enablement-leader",
+      "published_date": "Fri, 23 Oct 2026 14:00:00 GMT",
+      "content": "Partner with executive leadership across Product, Engineering, and GTM to align enablemen...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "hires",
+      "title": "How Google’s Rule of Four Can Streamline Executive Searches",
+      "url": "https://www.180one.com/how-googles-rule-of-four-can-streamline-and-improve-executive-searches",
+      "published_date": "Mon, 26 Oct 2026 00:00:00 GMT",
+      "content": "180one is Portland’s trusted partner for executive recruitment. We go beyond traditional [• ...] efficiently while delivering exceptional customer and financial...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "hires",
+      "title": "How Salesforce Gets Business Leaders to Hire Ahead with Nicole Pruner (VP Recruitment, Sale...",
+      "url": "https://www.youtube.com/watch?v=mXZWtHURB8A",
+      "published_date": "Thu, 29 Oct 2026 00:00:00 GMT",
+      "content": "Nicole has recruited at a 100%-commission agency, at Walmart and for 11 years at Google,",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "hires",
+      "title": "Choosing Your First Leadership Hire: 18 Questions To Ask",
+      "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2026/10/29/choosing-your-first-leadership-hire",
+      "published_date": "Thu, 29 Oct 2026 00:00:00 GMT",
+      "content": "Ask where you’ve become the bottleneck. Most founders hire for the role they like least o...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "funding",
+      "title": "Press Releases",
+      "url": "https://www.googlecloudpresscorner.com/2026-11-1-Google-Funds-US-160-Million-in-Shared-Water-Infrast...",
+      "published_date": "Mon, 02 Nov 2026 08:00:00 GMT",
+      "content": "NEGERI SEMBILAN, Malaysia, Nov. 2, 2026 - Anchoring its upcoming digital infrastructure d...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Google",
+      "category": "funding",
+      "title": "Google.org funds AI tools for teachers",
+      "url": "https://blog.google/products-and-platforms/products/education/google-org-funding-ai-education",
+      "published_date": "Tue, 03 Nov 2026 00:00:00 GMT",
+      "content": "Breadcrumb\n\n1. Home\n2. Products & Platforms\n3. Products\n4. Learning & Education\n\n#",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "funding",
+      "title": "Alphabet president Ruth Porat on how Google is funding AI to win long term, and the risks a...",
+      "url": "https://fortune.com/2026/10/12/google-ruth-porat-ai-spending-risks",
+      "published_date": "Mon, 12 Oct 2026 00:00:00 GMT",
+      "content": "Alphabet is spending roughly $200 billion this year to build out its AI capacity, and the",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Google",
+      "category": "funding",
+      "title": "Alphabet’s Isomorphic Labs in Funding Talks for at Least $40 Billion Value",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-08/alphabet-s-isomorphic-labs-in-funding-talks-for-a...",
+      "published_date": "Thu, 08 Oct 2026 04:00:00 GMT",
+      "content": "Isomorphic Labs, an Alphabet Inc. company using artificial intelligence to discover drugs",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Google",
+      "category": "funding",
+      "title": "Seattle's Ai2 lands $5 million Google grant for climate modeling - Puget Sound Business Jou...",
+      "url": "https://www.bizjournals.com/seattle/news/2026/11/04/ai2-allen-institute-ai-google-org-research.html",
+      "published_date": "Wed, 04 Nov 2026 21:51:00 GMT",
+      "content": "Unlock URL \n Order Reprints \n Gift this Article \n\nImage 1: Northlake Commons b...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "news",
+      "title": "Microsoft offers buyouts to 60,000 workers as it pours money into AI - CBS News",
+      "url": "https://www.cbsnews.com/news/microsoft-buyouts-60000-workers-artificial-intelligence-layoffs",
+      "published_date": "Mon, 26 Oct 2026 17:39:58 GMT",
+      "content": "Watch CBS News\n\n# Microsoft offers buyouts to 60,000 workers as it pours money into AI",
+      "truncated": false,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "news",
+      "title": "Microsoft",
+      "url": "https://tavily.com/knowledge/company/zjGHmpGgUF8p",
+      "published_date": null,
+      "content": "# Microsoft\nID: zjGHmpGgUF8p\nWebsite: www.microsoft.com\nLegal name: Microsoft Corporat...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "news",
+      "title": "Microsoft announces Maia 300, its next-generation custom AI chip - Source EMEA",
+      "url": "https://news.microsoft.com/source/emea/2026/10/microsoft-announces-maia-300-its-next-generation-cust...",
+      "published_date": "Mon, 12 Oct 2026 13:09:59 GMT",
+      "content": "Microsoft Source EMEA Company News Official Microsoft Blog Command Line Microsoft O...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "news",
+      "title": "Microsoft offers voluntary buyouts as AI leads to efficiency push",
+      "url": "https://www.cnbc.com/2026/10/26/microsoft-msft-voluntary-buyouts.html",
+      "published_date": "Mon, 26 Oct 2026 15:52:10 GMT",
+      "content": "In this article\n\nMicrosoft said Monday that it's offering buyouts to a wide swath of em...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "news",
+      "title": "Lumen and Microsoft expand collaboration to co-sell enterprise AI-ready networks - Source",
+      "url": "https://news.microsoft.com/source/2026/11/02/lumen-and-microsoft-expand-collaboration-to-co-sell-ent...",
+      "published_date": "Mon, 02 Nov 2026 17:51:17 GMT",
+      "content": "Microsoft AI Microsoft Security Dynamics 365 Microsoft 365 Microsoft Power Platform Micro...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "launches",
+      "title": "Microsoft Says Edge Opens 15% Faster on Windows 11 - Here's When You'll Notice It - TechRepublic",
+      "url": "https://www.techrepublic.com/article/news-microsoft-edge-faster-windows-11",
+      "published_date": "Mon, 02 Nov 2026 11:28:26 GMT",
+      "content": "Microsoft's Windows 11 update accelerates subsequent Edge launches when the browser is al...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "launches",
+      "title": "Everything announced at Microsoft’s Surface Laptop Ultra event | The Verge",
+      "url": "https://www.theverge.com/tech/1007147/microsoft-surface-laptop-ultra-windows-event-everything-announ...",
+      "published_date": "Wed, 07 Oct 2026 18:42:22 GMT",
+      "content": "In addition, Microsoft shared details about some updates coming to Windows, including “Hy...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "launches",
+      "title": "Introducing Microsoft Contact Center Intelligence - Microsoft Dynamics 365 Blog",
+      "url": "https://www.microsoft.com/en-us/dynamics-365/blog/business-leader/2026/10/21/microsoft-contact-cente...",
+      "published_date": "Wed, 21 Oct 2026 15:00:00 GMT",
+      "content": "365 Blog Product updates Onboarding and implementation Community Find a partner Soft...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "launches",
+      "title": "Microsoft Launches Copilot for Legal, Becoming the Fourth AI Giant in Five Months to Build...",
+      "url": "https://www.lawnext.com/2026/10/microsoft-launches-copilot-for-legal-becoming-the-fourth-ai-giant-in...",
+      "published_date": "Thu, 15 Oct 2026 17:56:34 GMT",
+      "content": "Microsoft today launched Copilot for Legal, offering more than 20 legal-specific skills i...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "launches",
+      "title": "Microsoft admits certifications can be a drag, launches creds that recognize skills",
+      "url": "https://www.theregister.com/software/2026/11/05/microsoft-admits-certifications-can-be-a-drag-launch...",
+      "published_date": "Thu, 05 Nov 2026 03:43:56 GMT",
+      "content": "### READ MORE\n\n #### HP Inc hires former GSK boss as CEO\n #### Windows pushed AI PCs,",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "hires",
+      "title": "Tech Moves: 2 Microsoft execs depart; Kymeta hires former CIA leader; Alaska Air names CITO...",
+      "url": "https://www.geekwire.com/2026/tech-moves-2-microsoft-execs-depart-kymeta-hires-former-cia-leader-ala...",
+      "published_date": "Wed, 21 Oct 2026 22:51:37 GMT",
+      "content": "“Having spent some of my most formative years at Microsoft, there’s definitely a sense of\"",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "hires",
+      "title": "OpenAI hones public sector focus with new leadership hires - Nextgov/FCW",
+      "url": "https://www.nextgov.com/people/2026/11/openai-hones-public-sector-focus-new-leadership-hires/417047?",
+      "published_date": "Wed, 04 Nov 2026 18:32:00 GMT",
+      "content": "Peter Guerra will serve as OpenAI’s head of tech success. Guerra formerly worked as Oracl...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "hires",
+      "title": "Microsoft denies cloud leadership called for significant cost cutting measures - DCD",
+      "url": "https://www.datacenterdynamics.com/en/news/microsoft-denies-cloud-leadership-called-for-significant-...",
+      "published_date": "Wed, 14 Oct 2026 00:00:00 GMT",
+      "content": "The publication notes that as competition is rising for experienced leadership in the AI",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "hires",
+      "title": "11 top companies with MBA leadership development programs",
+      "url": "https://www.gmac.com/resources/learners/business-careers/assess-grow-skills/mba-leadership-developme...",
+      "published_date": "Thu, 08 Oct 2026 00:00:00 GMT",
+      "content": "Length: 1+ years\n\nAvailable to: MBA graduates\n\nThe Microsoft Aspire Experience MBA tr...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "hires",
+      "title": "Atul Sehgal - Source Asia",
+      "url": "https://news.microsoft.com/source/asia/exec/atul-sehgal",
+      "published_date": "Wed, 04 Nov 2026 20:00:00 GMT",
+      "content": "He leads a high-performing team of consultants and technical experts, delivering solution...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "funding",
+      "title": "Microsoft plans to raise $25 billion in debt as it pursues AI buildout",
+      "url": "https://www.cnbc.com/2026/10/29/microsoft-25-billion-debt-offering.html",
+      "published_date": "Fri, 30 Oct 2026 00:38:13 GMT",
+      "content": "Microsoft will access additional funding sources to complement its own cash flow generati...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "funding",
+      "title": "Microsoft",
+      "url": "https://tavily.com/knowledge/company/zjGHmpGgUF8p",
+      "published_date": null,
+      "content": "# Microsoft\nID: zjGHmpGgUF8p\nWebsite: www.microsoft.com\nLegal name: Microsoft Corporat...",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "funding",
+      "title": "AI Bond Funding Might Change The Case For Investing In Microsoft (MSFT)",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/ai-bond-funding-might-change-042922208.html",
+      "published_date": "Mon, 02 Nov 2026 08:00:00 GMT",
+      "content": "This deal also speaks to the catalyst investors are watching. Large, multi year customers",
+      "truncated": true,
+      "url_truncated": false
+    },
+    {
+      "company": "Microsoft",
+      "category": "funding",
+      "title": "AMEX, Pfizer, Microsoft: See big names funding Malliotakis and grassroots backing DeCillis",
+      "url": "https://www.silive.com/politics/2026/11/amex-pfizer-microsoft-see-big-names-funding-malliotakis-and-...",
+      "published_date": "Sun, 01 Nov 2026 10:50:00 GMT",
+      "content": "Notable corporate PACs include the Pfizer Inc. PAC ($10,000); the Microsoft Corporation S...",
+      "truncated": true,
+      "url_truncated": true
+    },
+    {
+      "company": "Microsoft",
+      "category": "funding",
+      "title": "Global health nonprofit PATH elevates its security and protects private data with Microsoft",
+      "url": "https://www.microsoft.com/en/customers/story/27198-path-company-microsoft-defender-xdr",
+      "published_date": "Tue, 20 Oct 2026 00:00:00 GMT",
+      "content": "Urgent and fast-moving incidents like Ebola outbreaks underscore the need for both flexib...",
+      "truncated": true,
+      "url_truncated": false
+    }
+  ]
+}
