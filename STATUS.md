@@ -4,7 +4,9 @@ Built: 2026-11-03, locally only.
 Hackathon: Geek Room Global AI Hackathon, theme Tavily Research Agent.
 Submission deadline: November 15, 2026, 11:59 PM PKT. Judging: November 29, 2026.
 Live briefings via the Tavily Playground exist (Nov 5, 2026, see the
-new section at the end of this file). NOT pushed to GitHub, NOT
+new section at the end of this file). Pushed to public GitHub
+Nov 5, 2026: https://github.com/pakmultilinks-dot/tavily-research-agent,
+branch main, commit 152cb84, 32 files, verified live. NOT
 submitted yet, no demo video yet.
 
 ## What is built
@@ -180,7 +182,7 @@ on top of the same pipeline without changing the core logic.
   account owner to decide the next step.
 - Full record: LIVE_TEST.md, "LIVE VIA PLAYGROUND 2026-11-05".
 
-## Repo and pitch deck ready, 2026-11-05 (NOT pushed, NOT submitted)
+## Repo and pitch deck ready, 2026-11-05 (PUSHED same day, NOT submitted)
 
 - Secret scan, Nov 5: no real key, no .env file, no credential,
   no password, no private key in the folder. Only placeholders
@@ -209,11 +211,12 @@ on top of the same pipeline without changing the core logic.
   AI use, impact, limitations plus next steps plus why it wins.
   No em-dash, no invented metrics, no fake logos.
 - Unit tests re-run: 12 run, 12 passed.
-- Still NOT pushed to GitHub, NOT submitted to HackCulture, no
-  demo video yet.
+- PUSHED same day, Nov 5, 2026: public repo
+  https://github.com/pakmultilinks-dot/tavily-research-agent,
+  branch main, commit 152cb84, 32 files, verified with
+  gh repo view and git ls-remote HEAD. The gh CLI is logged in
+  as pakmultilinks-dot, so no reconnect or browser route was
+  needed. Still NOT submitted to HackCulture, no demo video yet.
 - Next steps, in order: 2-minute demo video (use the live
-  Playground briefings, never fixture output as if live), public
-  GitHub push after the parent creates the remote repo (GitHub
-  API credential expired Oct 30, 2026, so this may need a
-  reconnect or a browser route), HackCulture submission before
-  Nov 15, 2026, 11:59 PM PKT.
+  Playground briefings, never fixture output as if live),
+  HackCulture submission before Nov 15, 2026, 11:59 PM PKT.
