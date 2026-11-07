@@ -3,6 +3,12 @@
 A pre-meeting briefing agent for the Geek Room Global AI Hackathon.
 Theme: Tavily Research Agent (Tavily-primary).
 
+## 30-second demo
+
+1. Open the Streamlit app in Demo mode, no key needed.
+2. Pick a prebuilt live briefing (OpenAI, Google, or Microsoft).
+3. Read the summary, then open one source link to check it.
+
 ## Problem
 
 People go into meetings unprepared. Searching for what a company or
@@ -170,6 +176,11 @@ Reproduce the live briefings from the transcribed results:
 ```bash
 python3 build_playground_briefings.py
 ```
+
+Briefing quality, measured from the same live artefacts, is in
+`QUALITY.md` (reproduce with `python3 quality_report.py`):
+37 of 37 kept developments are dated, 37 of 37 carry a source
+URL, and 18 of 37 name the subject in both title and snippet.
 
 Honest limit, read this before judging: the Playground JSON view
 truncates long snippets at about 100 characters and truncates some
@@ -375,15 +386,18 @@ workflow scope to create it by push.
 python3 -m unittest discover -s tests -v
 ```
 
-52 tests, all offline: date parsing, window boundaries, old-result
+74 tests, all offline: date parsing, window boundaries, old-result
 filtering, deduplication, sorting, briefing formatting, empty
 results, a full fixture pipeline run, relevance-aware summary
 rules, the Streamlit UI helpers (input validation and display
 shaping), direct API key hygiene with mocked HTTP (200, 401,
 timeout retry, trimmed and empty keys), Tavily Extract parsing
 with mocked HTTP (results, failed_results, batching at 20,
-chunks cap, enrich top 8), and demo mode plus visitor-key
-handling. The two Streamlit app import tests run only when
-Streamlit is installed, because it is an optional dependency;
-with streamlit==1.67.0 installed, all 52 tests pass with
-0 skipped.
+chunks cap, enrich top 8), demo mode plus visitor-key handling,
+briefing quality measurement (kept and dropped counts, dated
+share, source share, named-subject share, date range, categories,
+cross-check against the committed Markdown headers), and the
+three shown failure messages (no key, HTTP 401, no results).
+The two Streamlit app import tests run only when Streamlit is
+installed, because it is an optional dependency; with
+streamlit==1.67.0 installed, all 74 tests pass with 0 skipped.

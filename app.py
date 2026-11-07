@@ -69,12 +69,23 @@ from tavily_agent.demo import (
     set_visitor_key,
 )
 from tavily_agent.render import render_markdown, render_pdf
-from tavily_agent.tavily_client import search_all_categories
+from tavily_agent.tavily_client import AUTH_FIX_MESSAGE, search_all_categories
 from tavily_agent.ui_helpers import (
     LIMITATION_NOTE,
     build_briefing_from_inputs,
     format_briefing_for_display,
     validate_inputs,
+)
+
+
+# Exact failure messages shown by this app. These are the only
+# three failure cases the app reports, and the "What if it fails"
+# section in demo mode quotes them verbatim. The 401 message
+# comes from tavily_client.py; the app shows it prefixed with
+# "Search failed: " when a live search raises it.
+NO_KEY_MESSAGE = "Live mode needs a Tavily key. Enter your own key above."
+NO_RESULTS_MESSAGE = (
+    "No verified developments in this window. Nothing is listed here on purpose."
 )
 
 
@@ -109,7 +120,7 @@ def _show_briefing(briefing) -> None:
 
     st.subheader("Key developments")
     if not view["developments"]:
-        st.write("No verified developments in this window. Nothing is listed here on purpose.")
+        st.write(NO_RESULTS_MESSAGE)
     for dev in view["developments"]:
         st.markdown(f"**[{dev['title']}]({dev['url']})** ({dev['date']})")
         if dev["snippet"]:
@@ -151,6 +162,10 @@ def main() -> None:
 
     if mode.startswith("Demo"):
         st.info(DEMO_NOTE)
+        st.write(
+            "30-second demo: 1. You are in Demo mode already, no key needed. "
+            "2. Pick a company below. 3. Read the summary, then open one source link."
+        )
         company_names = [name for name, _ in demo_companies()]
         chosen = st.selectbox("Company", company_names, index=0)
         slug = dict(demo_companies())[chosen]
@@ -168,6 +183,11 @@ def main() -> None:
                                demo["pdf_path"].read_bytes(),
                                file_name=f"briefing-{slug}.pdf",
                                mime="application/pdf")
+        st.subheader("What if it fails")
+        st.write("Three honest failure cases, with the exact message you will see:")
+        st.write(f"- No key: {NO_KEY_MESSAGE}")
+        st.write(f"- Wrong key: Search failed: {AUTH_FIX_MESSAGE}")
+        st.write(f"- No results: {NO_RESULTS_MESSAGE}")
         st.write("For a fresh briefing, switch to Live mode and enter your own Tavily key.")
         return
 
@@ -220,7 +240,7 @@ def main() -> None:
                     secrets_key if mode.startswith("Live") else None,
                 )
                 if not available:
-                    st.error("Live mode needs a Tavily key. Enter your own key above.")
+                    st.error(NO_KEY_MESSAGE)
                     return
                 raw = search_all_categories(
                     clean_subject, start.isoformat(), end.isoformat(),

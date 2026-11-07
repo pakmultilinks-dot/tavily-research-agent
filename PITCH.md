@@ -64,7 +64,7 @@ What exists now, locally, tested:
 - CLI that builds a briefing from fixtures end to end
 - Standard library web UI and Streamlit web UI (app.py) that build
   the same briefing from fixtures, through the same pipeline
-- 52 offline unit tests, all passing (Batch 2, Nov 7, 2026)
+- 74 offline unit tests, all passing (Batch 4, Nov 7, 2026)
 - Streamlit demo mode (default): shows the three prebuilt live
   briefings with no key and no Tavily call; live mode uses a
   visitor key for that session only, never stored
@@ -81,7 +81,8 @@ What exists now, locally, tested:
   results, in examples/live-openai/, examples/live-google/, and
   examples/live-microsoft/, Markdown and PDF each, with a
   relevance-aware summary (Batch 1, Nov 7, 2026)
-- Demo video, 117.3 seconds, 1080p, live briefings only
+- Demo video v2, 84.59 seconds, 1080p, live briefings only
+  (replaces the 117.3 second v1 at the same repo path)
 - Public GitHub repo, branch main, with CI workflow file ready locally
 - Hackathon submission: submitted for evaluation Nov 5, 2026,
   Under Review, locked, cannot be edited. The repo stays open for
@@ -117,12 +118,18 @@ to extractive on any failure, and the mode labelled in the briefing.
 - Works for any company or person with public web coverage.
 - Scales by adding categories, languages, or export formats,
   without changing the core filter and sourcing rules.
-- Cost is bounded: 4 searches per briefing, basic depth by default,
-  no raw content fetched.
+- Cost is bounded: 4 searches per briefing, basic depth by default.
+  Tavily Extract is off by default and enriches only the top 8,
+  about 8 credits for 37 URLs.
 
 ## 7. What makes this win
 
 Finished, working, and honest. Judges can run it, see real sources
 in the live briefings, and see the 30-day rule enforced in code and
-in tests. The project shows its live numbers and its one honest
-limit (the direct API route is unproven) instead of hiding them.
+in tests. A 30-second demo is at the top of the README and in the
+Streamlit demo mode. Briefing quality is measured, not claimed,
+in QUALITY.md (37 of 37 dated, 37 of 37 sourced, 18 of 37 naming
+the subject in both title and snippet). The three failure cases
+are shown with their exact messages in the app. The project shows
+its live numbers and its one honest limit (the direct API route
+is unproven) instead of hiding them.

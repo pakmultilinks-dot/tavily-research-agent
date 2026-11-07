@@ -333,7 +333,7 @@ on top of the same pipeline without changing the core logic.
   still points at demo-video.mp4; replacing that file at the same
   repo path is a parent decision.
 
-## Batch 1 improvements, 2026-11-07 (NOT pushed yet)
+## Batch 1 improvements, 2026-11-07 (PUSHED, commit 9c036e7)
 
 - Streamlit web UI added: app.py, plus framework-free helpers in
   tavily_agent/ui_helpers.py (input validation, display shaping,
@@ -392,7 +392,7 @@ on top of the same pipeline without changing the core logic.
 - NOT pushed to GitHub yet in this task. The parent will push the
   Batch 1 changes after verifying them.
 
-## Batch 2 improvements, 2026-11-07 (NOT pushed yet)
+## Batch 2 improvements, 2026-11-07 (PUSHED, commit 1e02322)
 
 Top 3 items from IMPROVEMENT_PLAN.md, in order:
 
@@ -478,7 +478,73 @@ Top 3 items from IMPROVEMENT_PLAN.md, in order:
   HTTP 401 with the stored credential, Extract is unproven
   live, and the Streamlit app is not deployed. Playground
   snippets are still truncated at about 100 characters.
+- Pushed to GitHub by the parent after verification, commit
+  1e02322. Do NOT add .github/workflows/ci.yml in the push;
+  that file is being added via the GitHub web UI in a separate
+  task.
+
+## Batch 4 improvements, 2026-11-07 (NOT pushed yet)
+
+Measured briefing quality, a 30-second first screen, and shown
+failure handling. No browser work, no live call, no key used.
+The Tesla, Amazon, and Nvidia Playground searches from Batch 3
+did not run because the browser window never opened, so no new
+live data exists and none was invented; this batch uses only
+the three committed live briefings.
+
+- Briefing quality, measured, no invented numbers:
+  New `quality_report.py` rebuilds each company from the
+  transcribed JSON through the same pipeline and honesty drops
+  as build_playground_briefings.py, then reports only measured
+  numbers, and cross-checks them against the committed
+  briefing Markdown headers. Output saved to `QUALITY.md`
+  (reproduce with `python3 quality_report.py`).
+  Measured, Nov 7, 2026: kept 37 of 60 (OpenAI 14, Google 15,
+  Microsoft 8); dropped as truncated URL 16, profile page 5,
+  duplicates 2, too old 0. Dated result 37/37 (100%), with
+  source URL 37/37 (100%), title and snippet both name the
+  subject 18/37 (49%): OpenAI 10/14, Google 4/15, Microsoft
+  4/8. Date range covered 2026-10-08 to 2026-11-04. All four
+  categories covered for every company. With full content
+  (Tavily Extract) 0/37, because enriching is off by default
+  and Extract has not been run live yet. The Markdown header
+  cross-check matches the rebuild for all three companies.
+  The named-subject share is low mainly because the Playground
+  JSON view truncates snippets at about 100 characters.
+- 30-second first screen: README.md now opens with a
+  "30-second demo" section (3 steps, no new claims), and the
+  Streamlit demo mode shows the same 3 steps as a short intro
+  line above the company picker.
+- Shown failure handling: the Streamlit demo mode now has a
+  "What if it fails" section listing the three honest failure
+  cases with their exact messages: no key ("Live mode needs a
+  Tavily key. Enter your own key above."), wrong key
+  ("Search failed: " plus the 401 fix message from
+  tavily_client.py), and no results ("No verified developments
+  in this window. Nothing is listed here on purpose."). The
+  messages live in one place in app.py (NO_KEY_MESSAGE,
+  NO_RESULTS_MESSAGE, and the imported AUTH_FIX_MESSAGE) and
+  are used by the code that shows them, so the section cannot
+  drift from the real messages. No new failure case was
+  invented.
+- Unit tests: 74 run, 74 passed, 0 skipped with streamlit
+  1.67.0 installed (22 new: quality report measurement,
+  Markdown header parsing, fixture measurement, and the three
+  shown failure messages). With Streamlit not installed, 72
+  pass and the 2 app import tests skip.
+- Pitch deck rebuilt from build_pitch_deck.py: pitch-deck.pdf
+  (10 pages) and pitch-deck.pptx (10 slides). The old deck
+  said 52 tests, now wrong, so the deck now says 74 tests and
+  adds the measured quality numbers to the live proof slide.
+  The submitted HackCulture deck file is locked and is not
+  changed by this.
+- Honest limits, unchanged: the direct API route still returns
+  HTTP 401 with the stored credential, Extract is unproven
+  live, the Streamlit app is not deployed, and no new companies
+  were added because the Batch 3 browser searches did not run.
+  Playground snippets are still truncated at about 100
+  characters.
 - NOT pushed to GitHub yet in this task. The parent will push
-  the Batch 2 changes after verifying them. Do NOT add
+  the Batch 4 changes after verifying them. Do NOT add
   .github/workflows/ci.yml in the push; that file is being
   added via the GitHub web UI in a separate task.

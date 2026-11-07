@@ -83,7 +83,10 @@ SLIDES = [
             "OpenAI: 14 kept of 20. Google: 15 kept of 20. Microsoft: 8 kept of 20.",
             "Dropped 23: 16 truncated URL, 5 profile pages, 2 duplicates, 0 too old.",
             "Files: examples/live-openai/, examples/live-google/, examples/live-microsoft/, briefing.md and briefing.pdf in each, plus the source JSON.",
-            "Tests: 52 run, 52 passed (offline unit tests, all HTTP mocked).",
+            "Tests: 74 run, 74 passed (offline unit tests, all HTTP mocked).",
+            "Briefing quality measured in QUALITY.md: 37 of 37 dated, "
+            "37 of 37 sourced, 18 of 37 name the subject in both title "
+            "and snippet.",
         ],
     ),
     (
