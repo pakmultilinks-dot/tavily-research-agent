@@ -1,0 +1,6 @@
+You walk into a meeting, and the other side has moved. A new launch, a new hire, a funding round. That is the problem this agent solves.
+Give it a company or a person, and a meeting date. It searches the last thirty days only, across news, launches, hires, and funding, and hands you a one page briefing, with a summary, key developments, and open questions.
+Here is the real thing running. This run rebuilds the live briefings from sixty real Tavily results, thirty seven kept, gathered on November fifth. It drops duplicates and any result whose source link cannot be verified.
+The results are real. OpenAI, fourteen developments kept, including the Pierre acquisition on November fourth. Google, fifteen kept, including the Gemini workplace agent. Microsoft, eight kept, including a twenty five billion dollar debt raise. Each one carries its date and its source link.
+What is new: the app opens in demo mode, with no key needed. A wrong key now gets a clear error. Extract can fetch full page content for the top eight links, off by default. Fifty two tests pass.
+Honest limits: the snippets are short extracts from the Playground, and the direct API route is still unproven, so Extract has not run live yet. Nothing here is invented. The code is public on GitHub, at github dot com slash pakmultilinks-dot slash tavily-research-agent.

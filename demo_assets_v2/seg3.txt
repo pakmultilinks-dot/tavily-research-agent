@@ -1,0 +1,1 @@
+Here is the real thing running. This run rebuilds the live briefings from sixty real Tavily results, thirty seven kept, gathered on November fifth. It drops duplicates and any result whose source link cannot be verified.

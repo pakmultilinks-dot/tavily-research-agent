@@ -1,0 +1,1 @@
+What is new: the app opens in demo mode, with no key needed. A wrong key now gets a clear error. Extract can fetch full page content for the top eight links, off by default. Fifty two tests pass.

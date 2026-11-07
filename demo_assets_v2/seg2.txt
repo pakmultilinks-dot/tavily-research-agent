@@ -1,0 +1,1 @@
+Give it a company or a person, and a meeting date. It searches the last thirty days only, across news, launches, hires, and funding, and hands you a one page briefing, with a summary, key developments, and open questions.

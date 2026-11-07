@@ -266,6 +266,73 @@ on top of the same pipeline without changing the core logic.
   video after verifying it, then it can be added to the saved
   HackCulture submission via Edit before the final submit.
 
+## Demo video v2, 2026-11-07
+
+- File: demo-video-v2.mp4, 2.4 MB, 84.59 seconds, 1920x1080,
+  H.264 video plus AAC audio, faststart. Verified with ffprobe:
+  one video stream, one audio stream, duration 84.59s. The old
+  demo-video.mp4 (117.3 seconds, 4.2 MB) is replaced at the same
+  repo path with the v2 content, so the submitted HackCulture
+  demo link now serves the better video. The v1 file stays in
+  git history under commit 60c2a65, nothing is lost.
+- Method: REAL screen recording, not a slideshow. A tkinter demo
+  window was driven live under Xvfb at 1920x1080 and recorded
+  with ffmpeg x11grab at 30 fps, while the real CLI run
+  (build_playground_briefings.py) streamed its real output, the
+  real live_smoke key check ran, the real unit tests ran, and
+  page 1 of the three real briefing PDFs scrolled on screen.
+  Voiceover was synthesized with the tts tool (Helio voice) from
+  a 227-word script in demo_assets_v2/narration.txt, 6 segments,
+  84.59 seconds total, with 0.7 second gaps between segments.
+  Silence check: no silent stretch longer than 2 seconds (max
+  1.34 seconds).
+- Fixes over v1: scene 4 shows plain company count lines plus the
+  rendered PDF pages only, never a raw markdown list, so no **
+  markers appear on screen; the mouse cursor is hidden everywhere
+  (cursor="none" on the root, text widget and canvas), so no
+  I-beam appears in any frame. The PDF page images were re-rendered
+  from the current briefing PDFs with pdftoppm at 110 DPI after
+  the first v2 recording showed the pre-Batch 1 summaries, and the
+  video was re-recorded; the on-screen Microsoft page now shows
+  the Batch 1 relevance-aware summary (Edge faster, debt raise,
+  buyouts) with no OpenAI hires article in the Top findings.
+- Narration summary: the meeting problem, how the agent works
+  (30-day window, news, launches, hires, funding), the live run
+  rebuilding briefings from 60 real Tavily results, 37 kept, the
+  kept counts (OpenAI 14, Google 15, Microsoft 8) with named
+  examples (Pierre acquisition Nov 4, Gemini workplace agent,
+  25 billion dollar debt raise), the Batch 2 features (demo mode
+  with no key, clear key error, Extract off by default, 52 tests),
+  the honest limits (short Playground snippets, direct API route
+  still unproven, Extract not run live yet), and the public GitHub
+  repo plus close.
+- Live briefings only: the fixture sample is never shown as live.
+  The Playground source is stated in the narration and visible on
+  screen in the briefing PDF pages. No new companies were added:
+  the Tesla, Amazon and Nvidia Playground searches failed on
+  2026-11-07 because the browser window never opened, so no new
+  live data exists and none was invented.
+- Frame check: 9 frames sampled across all 6 scenes and viewed.
+  Titles match the narration playing at that time, no text overlaps,
+  no em-dash on screen, no ** markers on screen, no mouse cursor
+  in any frame. One wording note: the narration says "Fifty two
+  tests pass", while the on-screen test run shows "Ran 52 tests,
+  OK (skipped=2)" without Streamlit installed; with Streamlit
+  installed all 52 pass (Batch 2 verification).
+- The demo mode screen is a typed summary of what demo mode shows
+  (the three live briefings, no key needed), not a recording of
+  the Streamlit app itself running. The Streamlit app was verified
+  separately in Batch 1 and Batch 2 (HTTP 200 locally).
+- Reproduce: demo_assets_v2/demo_player_v2.py, timeline and
+  narration are in demo_assets_v2/. The live briefing PDFs were
+  restored to their committed versions after each on-screen
+  rebuild, so the repo working tree shows only demo-video-v2.mp4
+  and demo_assets_v2/ as untracked.
+- NOT pushed to GitHub yet in this task. The parent will push the
+  video after verifying it. The locked HackCulture submission
+  still points at demo-video.mp4; replacing that file at the same
+  repo path is a parent decision.
+
 ## Batch 1 improvements, 2026-11-07 (NOT pushed yet)
 
 - Streamlit web UI added: app.py, plus framework-free helpers in

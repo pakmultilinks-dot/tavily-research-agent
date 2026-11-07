@@ -1,0 +1,1 @@
+Honest limits: the snippets are short extracts from the Playground, and the direct API route is still unproven, so Extract has not run live yet. Nothing here is invented. The code is public on GitHub, at github dot com slash pakmultilinks-dot slash tavily-research-agent.
