@@ -19,12 +19,26 @@ not a profile page, and are flagged "date unknown" in the briefing.
 
 Usage:
     python3 build_playground_briefings.py
+    python3 build_playground_briefings.py --enrich
 
 Outputs: examples/live-<company>/briefing.md and briefing.pdf.
 This overwrites the EMPTY Nov 4 files in examples/live-openai/ only.
+
+Enriching is OFF by default. With --enrich, the top 8 kept
+developments per company are enriched with Tavily Extract
+(tavily_agent/extract.py), using the key from TAVILY_API_KEY.
+It adds the first extracted chunk to each enriched development
+as full_content, keeps the original snippet, date, and URL, and
+never changes the kept counts. Cost, from the Tavily docs:
+basic depth is 1 credit per 5 successful extractions, so
+enriching the 37 kept URLs costs about 8 credits if all
+succeed. That is arithmetic from the documented per-5 cost,
+not a measured bill. Without --enrich, no network call is
+made and the briefings rebuild exactly as before.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import date
@@ -60,6 +74,20 @@ PROFILE_PREFIX = "https://tavily.com/knowledge/company/"
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Build live briefings from the Playground transcription.")
+    parser.add_argument("--enrich", action="store_true",
+                        help="Enrich the top 8 kept developments per "
+                             "company with Tavily Extract (needs "
+                             "TAVILY_API_KEY, off by default).")
+    args = parser.parse_args()
+    if args.enrich:
+        from tavily_agent.extract import enrich_top_results
+        print("Enriching is ON: top 8 kept developments per company "
+              "will use Tavily Extract (about 8 credits at basic "
+              "depth if all 37 succeed, per the docs).")
+    else:
+        print("Enriching is OFF (default): no network call is made.")
     data = json.loads(JSON_PATH.read_text(encoding="utf-8"))
     results = data["results"]
     print(f"Loaded {len(results)} transcribed results from {JSON_PATH.name}")
@@ -93,6 +121,12 @@ def main() -> int:
         briefing.dropped_truncated_url_count = dropped_trunc
         briefing.dropped_profile_count = dropped_profile
         briefing.source_note = SOURCE_NOTE
+        if args.enrich:
+            outcome = enrich_top_results(briefing.results, company, top_n=8)
+            briefing.extract_enriched_count = outcome["enriched"]
+            briefing.extract_failed_count = outcome["failed"]
+            print(f"  Extract: enriched {outcome['enriched']}, "
+                  f"failed {outcome['failed']} (snippet kept as fallback)")
 
         out_dir = PROJECT_DIR / "examples" / f"live-{SLUGS[company]}"
         out_dir.mkdir(parents=True, exist_ok=True)

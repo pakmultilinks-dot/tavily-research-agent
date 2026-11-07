@@ -1,0 +1,10 @@
+# Streamlit config for the Tavily Research Agent app.
+# Secrets live in .streamlit/secrets.toml locally and in the
+# Community Cloud app settings when deployed. That secrets file
+# is ignored by git and must never be committed.
+
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = true

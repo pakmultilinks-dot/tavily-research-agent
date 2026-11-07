@@ -324,3 +324,94 @@ on top of the same pipeline without changing the core logic.
   about 100 characters.
 - NOT pushed to GitHub yet in this task. The parent will push the
   Batch 1 changes after verifying them.
+
+## Batch 2 improvements, 2026-11-07 (NOT pushed yet)
+
+Top 3 items from IMPROVEMENT_PLAN.md, in order:
+
+1. Direct API 401 proof, with key hygiene checks:
+   - `tavily_agent/tavily_client.py`: the key is trimmed of
+     surrounding spaces, an empty key is rejected before any
+     network call, a search is retried once only on timeout and
+     never on 401, and a 401 raises TavilyAuthError with a clear
+     message naming the fix (check the key in the Tavily
+     dashboard, copy the active default dev key, set it as
+     TAVILY_API_KEY, never paste it in chat or in code). The key
+     value is never logged or shown in an error. A key that does
+     not start with tvly- only earns a warning, because that
+     prefix comes from a secondary source and is unverified for
+     this project.
+   - `live_smoke.py`: one small live search (max_results 1),
+     reports status only, writes no files. Exit 0 means Tavily
+     answered, exit 2 means 401, exit 1 means any other failure.
+     Verified without a key: exits 1 with the missing-key
+     message. No live call was made in this task, so the direct
+     API route is still unproven live.
+   - `live_briefing.py` docstring updated to the 401 status and
+     to point at live_smoke.py first.
+2. Tavily Extract for full content, top 8 enrich only, off by
+   default:
+   - New `tavily_agent/extract.py`: POST
+     https://api.tavily.com/extract, URLs in batches of 20,
+     query set to subject plus category, chunks_per_source 3,
+     basic depth, markdown format. Attaches the first extracted
+     chunk (about 800 characters) to each enriched development
+     as full_content, keeps the original snippet, date, and URL.
+     Checks both results and failed_results even on HTTP 200.
+     On 401 it raises the same clear error, and the caller
+     keeps the snippet as fallback.
+   - `build_playground_briefings.py --enrich` turns it on for
+     the top 8 kept developments per company. Default rebuild
+     verified: no flag, no network call, Markdown files
+     byte-identical, kept counts unchanged (OpenAI 14, Google
+     15, Microsoft 8, total 37). Cost, from the docs: basic
+     depth is 1 credit per 5 successful extractions, so
+     enriching the 37 kept URLs costs about 8 credits if all
+     succeed. That is arithmetic from the documented per-5
+     cost, not a measured bill.
+   - Extract has NOT been run live yet, for the same 401
+     reason as Search. Code and mocked tests only.
+3. Live Streamlit deployment in read-only demo mode:
+   - `app.py` now opens in Demo mode by default: pick OpenAI,
+     Google, or Microsoft and see the prebuilt live briefing
+     from Nov 5, 2026, with no Tavily call and no key used.
+     Live mode uses a visitor key for that session only, never
+     stored and never written to a file ("Clear key" removes
+     it); a deployment secret is only a fallback when no
+     visitor key is entered. Mock mode is unchanged.
+   - New `tavily_agent/demo.py` (framework-free, unit tested
+     without Streamlit) loads the committed briefing files and
+     parses kept counts from their headers, never hardcoded.
+   - `requirements.txt` pins streamlit==1.67.0, verified as
+     the latest release on pip on 2026-11-07, and installed
+     in a test venv where all 52 tests pass with 0 skipped.
+     `.streamlit/config.toml` added (usage stats off, headless).
+     `.gitignore` now also excludes `.streamlit/secrets.toml`.
+   - README documents the Community Cloud deploy steps and
+     the honest limits: the app sleeps after 12 hours without
+     traffic, and the live link can only go in the README, not
+     the locked HackCulture form.
+   - The app has NOT been deployed yet. The deploy click needs
+     a signed-in Streamlit account connected to GitHub, which
+     is a parent step. Demo page verified locally: the app
+     started headless and returned HTTP 200.
+- Unit tests: 52 run, 52 passed, 0 skipped with streamlit
+  1.67.0 installed (29 new: direct API key hygiene with mocked
+  HTTP, Extract parsing with mocked HTTP, demo mode and
+  visitor-key handling). With Streamlit not installed, 50 pass
+  and the 2 app import tests skip.
+- Pitch deck rebuilt from build_pitch_deck.py: pitch-deck.pdf
+  (10 pages) and pitch-deck.pptx (10 slides). The old deck said
+  23 tests and "no raw content fetched", both now wrong, so the
+  deck now says 52 tests, Extract off by default at about 8
+  credits for 37 URLs, and that Extract and the Streamlit
+  deployment are unproven and not deployed yet. The submitted
+  HackCulture deck file is locked and is not changed by this.
+- Honest limits, unchanged: the direct API route still returns
+  HTTP 401 with the stored credential, Extract is unproven
+  live, and the Streamlit app is not deployed. Playground
+  snippets are still truncated at about 100 characters.
+- NOT pushed to GitHub yet in this task. The parent will push
+  the Batch 2 changes after verifying them. Do NOT add
+  .github/workflows/ci.yml in the push; that file is being
+  added via the GitHub web UI in a separate task.

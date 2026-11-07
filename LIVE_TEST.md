@@ -529,3 +529,76 @@ Microsoft: kept 8, excluded 4.
   %PDF-1.4, every kept URL in each Markdown appears in its PDF
   (OpenAI 14, Google 15, Microsoft 8), and no `**` appears in
   extracted PDF text.
+
+## Batch 2, 2026-11-07: key hygiene, Extract, demo mode (mocked only)
+
+No live call was made in this task. No key was used, and no key
+value appears in any file. The direct API route and Tavily
+Extract are still unproven live.
+
+### Direct API key hygiene, mocked tests
+
+- `tavily_agent/tavily_client.py`: key trimmed, empty key
+  rejected before any network call, one retry only on timeout,
+  never on 401, 401 raises TavilyAuthError with the fix
+  (check the key in the Tavily dashboard, copy the active
+  default dev key, set it as TAVILY_API_KEY, never paste it
+  in chat or in code). The tvly- prefix is from a secondary
+  source (Tavily MCP troubleshooting notes) and is unverified
+  for this project, so a key without it only earns a warning
+  and is still sent. Recorded here as unverified, not as fact.
+- Mocked tests in `tests/test_live_client.py`: mocked 200
+  returns one parsed result, mocked 401 raises the clear error
+  and is called exactly once (no retry), mocked timeout
+  retries once then succeeds, mocked timeout twice raises
+  after one retry, a key with surrounding spaces is sent
+  trimmed, an empty key raises before any network call, and
+  `live_smoke.py` without a key exits 1 with the missing-key
+  message. `live_smoke.py` was not run with a real key, so
+  no live status is claimed.
+
+### Tavily Extract, top 8 enrich only, off by default
+
+- Verified facts, from the official docs endpoint page
+  (updated 2026-09-15): POST https://api.tavily.com/extract,
+  up to 20 URLs per request, query reranks chunks,
+  chunks_per_source 1 to 5 (default 3, only with a query),
+  basic or advanced depth, markdown or text format, timeout
+  1.0 to 60.0 seconds. Check both results and failed_results
+  even on HTTP 200. Extract does not return published_date.
+- Cost note, from the same docs: basic 1 credit per 5
+  successful extractions, advanced 2 credits per 5. Enriching
+  the 37 kept URLs at basic depth, all successful, is 37 / 5
+  rounded up, 8 credits. That is arithmetic from the
+  documented per-5 cost, not a measured bill.
+- Mocked tests in `tests/test_extract.py`: mocked 200 with
+  results and failed_results, first chunk only, a URL with no
+  content lands in failed, mocked 401 raises the clear error,
+  chunks_per_source capped at 5, batching at 20 URLs (25 URLs
+  sent as 20 plus 5), enrich touches only the top 8, enrich
+  never changes a title, URL, date, or snippet.
+- Default rebuild verified: `python3
+  build_playground_briefings.py` with no flag made no network
+  call, Markdown files byte-identical, kept counts unchanged
+  (OpenAI 14, Google 15, Microsoft 8, total 37; dropped old 0,
+  duplicates 2, truncated URL 16, profile 5). The regenerated
+  PDFs differed only by embedded creation date and were
+  restored to their committed versions, so the Batch 2 commit
+  carries no briefing file changes.
+
+### Streamlit demo mode
+
+- Demo mode is the default in `app.py`: the three prebuilt
+  live briefings, no Tavily call, no key used. Live mode uses
+  a visitor key for that session only, never stored, never
+  written to a file. A deployment secret is only a fallback.
+- Tests in `tests/test_demo_mode.py`: demo kept counts parsed
+  from the committed files (14, 15, 8), live mode disabled
+  without a key, visitor key set in memory only and cleared,
+  no secrets file created.
+- Streamlit pinned to 1.67.0, verified as the latest release
+  on pip on 2026-11-07 and installed in a test venv, where
+  all 52 tests pass with 0 skipped. The app was started
+  headless locally and its demo page returned HTTP 200.
+  It has NOT been deployed; the deploy click needs a
+  signed-in Streamlit account connected to GitHub.

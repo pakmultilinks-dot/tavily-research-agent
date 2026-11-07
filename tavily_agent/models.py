@@ -15,6 +15,11 @@ class SearchResult:
     score: float = 0.0
     category: str = "news"
     date_unknown: bool = False
+    # Full content from Tavily Extract, when enriching ran. Empty
+    # means no Extract call was made for this result, or it failed
+    # and the search snippet is the fallback. The snippet, date,
+    # and URL are never overwritten by extracted content.
+    full_content: str = ""
 
     def __post_init__(self) -> None:
         self.title = (self.title or "Untitled result").strip()
@@ -42,4 +47,6 @@ class Briefing:
     dropped_truncated_url_count: int = 0
     dropped_profile_count: int = 0
     summary_excluded_count: int = 0
+    extract_enriched_count: int = 0
+    extract_failed_count: int = 0
     source_note: str = ""

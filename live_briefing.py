@@ -13,9 +13,18 @@ Usage:
         --out examples/live-openai/briefing
 
 Outputs: <out>.md and <out>.pdf, plus counts printed to stdout.
-Live status: UNTESTED live as of the 2026-11-03 attempt recorded in
-LIVE_TEST.md, because calls to api.tavily.com timed out from this
-environment. Compile-checked only until a live run succeeds.
+Live status: UNPROVEN live as of 2026-11-07. Calls to
+api.tavily.com from this environment first timed out (Nov 3,
+2026) and then returned HTTP 401 with the stored credential
+(Nov 5, 2026), while the same Tavily key works in the Tavily
+Playground. Full record: LIVE_TEST.md. Before running this
+script, run python3 live_smoke.py with a fresh key in
+TAVILY_API_KEY to check the direct route; it reports status
+only and writes no files. The direct route client
+(tavily_agent/tavily_client.py) now trims the key, rejects an
+empty key before any network call, retries once only on
+timeout, never on 401, and raises a clear error on 401 that
+names the fix.
 """
 from __future__ import annotations
 

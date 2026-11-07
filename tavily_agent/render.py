@@ -24,6 +24,16 @@ def render_markdown(b: object) -> str:
     if b.source_note:
         lines.append("")
         lines.append(b.source_note)
+    enriched = getattr(b, "extract_enriched_count", 0)
+    failed = getattr(b, "extract_failed_count", 0)
+    if enriched or failed:
+        lines.append("")
+        lines.append(
+            f"Tavily Extract enriched {enriched} development(s) with "
+            f"full content; {failed} URL(s) failed Extract and keep "
+            "their search snippet as fallback. Dates and URLs are "
+            "from the search result, never from Extract."
+        )
     lines.append("")
     lines.append("## Summary")
     lines.append("")
@@ -58,6 +68,9 @@ def render_markdown(b: object) -> str:
                 lines.append(f"  Source: {result.url}")
                 if result.snippet:
                     lines.append(f"  {result.snippet[:400]}")
+                full = getattr(result, "full_content", "") or ""
+                if full:
+                    lines.append(f"  Full content (Tavily Extract): {full[:800]}")
             lines.append("")
     lines.append("## Discussion points")
     lines.append("")
@@ -113,6 +126,15 @@ def render_pdf(b: object, path: str) -> str:
         para(f"Dropped as truncated URL: {b.dropped_truncated_url_count} | Dropped as profile page: {b.dropped_profile_count}")
     if b.source_note:
         para(b.source_note)
+    enriched = getattr(b, "extract_enriched_count", 0)
+    failed = getattr(b, "extract_failed_count", 0)
+    if enriched or failed:
+        para(
+            f"Tavily Extract enriched {enriched} development(s) with "
+            f"full content; {failed} URL(s) failed Extract and keep "
+            "their search snippet as fallback. Dates and URLs are "
+            "from the search result, never from Extract."
+        )
     para("Summary", "Heading2")
     para(b.summary)
     excluded = getattr(b, "summary_excluded_count", 0)
@@ -132,6 +154,9 @@ def render_pdf(b: object, path: str) -> str:
             para(f"{result.title} ({date_text}) - Source: {result.url}")
             if result.snippet:
                 para(result.snippet[:400])
+            full = getattr(result, "full_content", "") or ""
+            if full:
+                para(f"Full content (Tavily Extract): {full[:800]}")
     para("Discussion points", "Heading2")
     for point in b.discussion_points:
         para(f"- {point}")

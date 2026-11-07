@@ -72,6 +72,7 @@ SLIDES = [
             "Parse published_date (ISO and RFC/GMT), filter outside the window, deduplicate by normalised URL, sort newest first, undated flagged.",
             "Summarise: relevance-aware extractive by default, optional LLM. Render: Markdown and PDF.",
             "Key is never hardcoded: Tavily key comes only from TAVILY_API_KEY.",
+            "Optional: Tavily Extract adds full content for the top 8 developments, off by default. Streamlit demo mode shows the prebuilt live briefings with no key.",
         ],
     ),
     (
@@ -82,7 +83,7 @@ SLIDES = [
             "OpenAI: 14 kept of 20. Google: 15 kept of 20. Microsoft: 8 kept of 20.",
             "Dropped 23: 16 truncated URL, 5 profile pages, 2 duplicates, 0 too old.",
             "Files: examples/live-openai/, examples/live-google/, examples/live-microsoft/, briefing.md and briefing.pdf in each, plus the source JSON.",
-            "Tests: 23 run, 23 passed (offline unit tests).",
+            "Tests: 52 run, 52 passed (offline unit tests, all HTTP mocked).",
         ],
     ),
     (
@@ -116,7 +117,7 @@ SLIDES = [
             "Saves preparation time before every sales, hiring, partnership, or investor meeting.",
             "Works for any company or person with public web coverage.",
             "Scales by adding categories, languages, or export formats, without changing the core filter and sourcing rules.",
-            "Cost is bounded: 4 searches per briefing, basic depth by default, no raw content fetched.",
+            "Cost is bounded: 4 searches per briefing, basic depth by default. Tavily Extract is off by default and enriches only the top 8, about 8 credits for 37 URLs.",
         ],
     ),
     (
@@ -125,6 +126,7 @@ SLIDES = [
         [
             "Playground snippets are truncated at about 100 characters, kept exactly as returned.",
             "The direct API route is still unproven: HTTP 401 here, while the same key works in the Playground. The live briefings prove the pipeline on real Tavily data.",
+            "Tavily Extract is also unproven live, and the Streamlit app is not deployed yet. Both are code and mocked tests, off by default.",
             "Submitted for evaluation Nov 5, 2026, Under Review. The repo stays open for improvements until judging on Nov 29, 2026.",
             "Judges can run it and check every source in the live briefings.",
             "The 30-day rule is enforced in code and in tests, not just in words.",

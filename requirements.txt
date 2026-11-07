@@ -2,4 +2,6 @@ requests>=2.31
 reportlab>=4.0
 # Optional, only for the Streamlit web UI (app.py).
 # The standard library web UI (web_ui.py) and the CLI work without it.
-streamlit>=1.30
+# Pinned to 1.67.0, verified as the latest release on pip on
+# 2026-11-07, so a deploy is not upgraded without notice.
+streamlit==1.67.0

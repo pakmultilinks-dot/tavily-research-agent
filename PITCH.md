@@ -64,7 +64,17 @@ What exists now, locally, tested:
 - CLI that builds a briefing from fixtures end to end
 - Standard library web UI and Streamlit web UI (app.py) that build
   the same briefing from fixtures, through the same pipeline
-- 23 offline unit tests, all passing
+- 52 offline unit tests, all passing (Batch 2, Nov 7, 2026)
+- Streamlit demo mode (default): shows the three prebuilt live
+  briefings with no key and no Tavily call; live mode uses a
+  visitor key for that session only, never stored
+- Tavily Extract client, top 8 enrich only, off by default, with
+  the search snippet kept as fallback (code and mocked tests
+  only, not run live yet)
+- Direct API key hygiene: key trimmed, empty key rejected before
+  any network call, one retry only on timeout, never on 401, and
+  a clear 401 error naming the fix, plus a live smoke check
+  (live_smoke.py) that reports status only
 - Sample briefing in Markdown and PDF in examples/
 - Live briefings from real Tavily Playground data, Nov 5, 2026:
   OpenAI 14 kept, Google 15 kept, Microsoft 8 kept, 37 of 60
@@ -83,6 +93,11 @@ What is NOT done yet:
 - A proven direct API run (live_briefing.py still returns 401
   from this environment; the Playground briefings prove the
   pipeline on real Tavily data, not the API client route)
+- A live Tavily Extract run (same 401 reason; code and mocked
+  tests only, enrich off by default)
+- A deployed Streamlit app (demo mode is code and tests only;
+  the deploy click needs a signed-in Streamlit account, and the
+  live link can only go in the README, not the locked form)
 
 See STATUS.md for the exact remaining steps.
 

@@ -44,17 +44,26 @@ Files:
 - `web_ui.py`: simple web UI, Python standard library only, no extra framework
 - `app.py`: Streamlit web UI, same pipeline, optional (needs `streamlit`)
 - `tavily_agent/dates.py`: date parsing and the 30-day window
-- `tavily_agent/tavily_client.py`: Tavily API client
+- `tavily_agent/tavily_client.py`: Tavily Search API client, with
+  key hygiene (key trimmed, empty key rejected before any network
+  call, one retry only on timeout, never on 401, clear error on 401)
+- `tavily_agent/extract.py`: Tavily Extract API client, top 8 enrich only
+- `tavily_agent/demo.py`: demo mode data for the Streamlit app,
+  framework-free so it can be unit tested without Streamlit
 - `tavily_agent/briefing.py`: filter, dedupe, sort, briefing builder
 - `tavily_agent/summarizer.py`: extractive fallback plus optional LLM summary
 - `tavily_agent/ui_helpers.py`: shared input validation and display shaping for both web UIs
 - `tavily_agent/render.py`: Markdown and PDF rendering
 - `live_briefing.py`: live runner, reuses the same pipeline
+- `live_smoke.py`: one small live search, reports status only, writes no files
 - `build_playground_briefings.py`: builds the live briefings from the
   transcribed Tavily Playground results in `examples/live-playground-2026-11-05.json`
+  (`--enrich` adds Tavily Extract for the top 8 per company, off by default)
 - `build_pitch_deck.py`: rebuilds the pitch deck (PDF and PPTX) from one slide list
 - `.github/workflows/ci.yml`: GitHub Actions, runs the unit tests on Python 3.12
-- `tests/test_briefing.py` and `tests/test_streamlit_ui.py`: offline unit tests
+- `tests/test_briefing.py`, `tests/test_streamlit_ui.py`,
+  `tests/test_live_client.py`, `tests/test_extract.py`,
+  `tests/test_demo_mode.py`: offline unit tests, all HTTP mocked
 - `examples/fixtures.json`: clearly labelled test fixtures, NOT real data
 - `examples/sample_briefing.md` and `examples/sample_briefing.pdf`: sample output from fixtures
 - `examples/live-openai/`, `examples/live-google/`, `examples/live-microsoft/`:
@@ -66,11 +75,12 @@ Files:
 pip install -r requirements.txt
 ```
 
-Requirements are `requests` and `reportlab`, plus `streamlit` as an
-optional dependency for the Streamlit web UI only. The standard
-library web UI and the CLI run without Streamlit. That choice was
-made for robustness: fewer dependencies, fewer ways for the demo
-to fail.
+Requirements are `requests` and `reportlab`, plus `streamlit==1.67.0`
+only for the Streamlit web UI. The version is pinned to 1.67.0,
+verified as the latest release on pip on 2026-11-07, so a deploy
+is not upgraded without notice. The standard library web UI and
+the CLI run without Streamlit. That choice was made for
+robustness: fewer dependencies, fewer ways for the demo to fail.
 
 ## Run, mock mode (no key, no network)
 
@@ -100,6 +110,23 @@ python3 main.py --subject "Acme Corp" --meeting 2026-11-10 --out examples/acme
 Never put a real key in source code, in a committed `.env` file, or
 in a chat message. `.env.example` lists only variable names.
 `.gitignore` excludes `.env`.
+
+Key hygiene in the client (`tavily_agent/tavily_client.py`): the
+key is trimmed of surrounding spaces, an empty key is rejected
+before any network call, a search is retried once only on
+timeout and never on 401, and a 401 raises a clear error that
+names the fix (check the key in the Tavily dashboard, copy the
+active default dev key, set it as `TAVILY_API_KEY`, never paste
+it in chat or in code). The key value is never logged or shown
+in an error. A key that does not start with `tvly-` only earns
+a warning, because that prefix comes from a secondary source
+and is unverified for this project. Check a fresh key first
+with one small search that reports status only:
+
+```bash
+export TAVILY_API_KEY="your-key-here"
+python3 live_smoke.py
+```
 
 ## Live results, Nov 5, 2026
 
@@ -178,13 +205,59 @@ streamlit run app.py
 ```
 
 Then open the local URL Streamlit prints (usually
-http://localhost:8501). Enter a company or person and a meeting
-date, tick "Mock mode" for fixtures or leave it unticked for live
-mode, and press "Build briefing". The briefing shows the summary,
-kept and dropped counts, every development with its source link,
-discussion points, open questions, and Markdown and PDF download
-buttons. Both web UIs share the input validation and display
-helpers in `tavily_agent/ui_helpers.py`.
+http://localhost:8501). It opens in Demo mode by default: pick
+OpenAI, Google, or Microsoft and see the prebuilt live briefing
+from Nov 5, 2026, with no Tavily call and no key used. Switch to
+Live mode for a fresh briefing: enter your own Tavily key, which
+is used for that session only, never stored and never written to
+a file (use "Clear key" when done). If the app is deployed with
+a key in Streamlit secrets, that is only a fallback when no
+visitor key is entered. Mock mode runs with local fixtures and
+needs no key. The briefing shows the summary, kept and dropped
+counts, every development with its source link, discussion
+points, open questions, and Markdown and PDF download buttons.
+Both web UIs share the input validation and display helpers in
+`tavily_agent/ui_helpers.py`.
+
+Deploy (Streamlit Community Cloud, owner step, not done here):
+push the repo to GitHub, then in the Streamlit workspace click
+Create app, pick the repo, branch main, and `app.py`, and click
+Deploy. Every push to main redeploys automatically. Secrets, if
+wanted, go in the app settings, never into the repo: the file
+`.streamlit/secrets.toml` is ignored by git and must never be
+committed. The live link cannot be added to the locked
+HackCulture form, only here in the README. Limits to expect:
+the app sleeps after 12 hours without traffic, so a first visit
+may show a wake-up screen first.
+
+## Tavily Extract, full content for the top 8
+
+The Playground snippets in the live briefings are truncated at
+about 100 characters. Tavily Extract (`tavily_agent/extract.py`,
+endpoint POST https://api.tavily.com/extract, verified from the
+official docs 2026-11-07) can fetch the real page content for
+the top 8 kept developments per company: URLs in batches of 20,
+query set to the subject plus category, `chunks_per_source` 3,
+basic depth, markdown format. The first extracted chunk (about
+800 characters) is attached as full content, and the original
+snippet, published date, and URL are kept unchanged. If Extract
+fails for a URL, that URL is recorded in `failed_results` and
+keeps its snippet as fallback. Extract does not return a
+published date, so the date always comes from the search result.
+
+Enriching is OFF by default. Turn it on with:
+
+```bash
+export TAVILY_API_KEY="your-key-here"
+python3 build_playground_briefings.py --enrich
+```
+
+Cost, from the docs: basic depth is 1 credit per 5 successful
+extractions, so enriching the 37 kept URLs costs about 8 credits
+if all succeed. That is arithmetic from the documented per-5
+cost, not a measured bill. Extract has not been run live yet:
+the 401 key problem affects Extract the same way it affects
+Search, and the tests use mocked HTTP only.
 
 ## How AI is used
 
@@ -199,6 +272,11 @@ helpers in `tavily_agent/ui_helpers.py`.
   Other kept developments stay in Key developments in full, with
   source links, and the briefing notes how many were left out of
   the summary.
+- Tavily Extract, off by default, can add the first extracted
+  chunk of real page content to the top 8 kept developments per
+  company, so the briefing is not limited to truncated snippets.
+  The snippet, date, and URL are kept, and a failed extraction
+  falls back to the snippet.
 - An LLM summary is used only if `LLM_API_KEY` is set. It is given
   only the supplied snippets and is told not to invent dates, facts,
   or sources. Any LLM failure falls back to the extractive summary,
@@ -254,7 +332,17 @@ future developments cannot be searched yet. Example: a meeting on
   stored credential, while the same Tavily key works in the
   Playground. The Nov 5 live briefings above prove the pipeline on
   real Tavily data gathered in the Playground, not the direct API
-  client route. See STATUS.md and LIVE_TEST.md.
+  client route. The Batch 2 client now trims the key, rejects an
+  empty key before any network call, retries once only on timeout,
+  and raises a clear 401 error naming the fix, all covered by
+  mocked tests, but no live call has succeeded yet. See STATUS.md
+  and LIVE_TEST.md.
+- Tavily Extract has NOT been run live yet, for the same 401
+  reason. The enrich path is code and mocked tests only, off by
+  default, with the snippet kept as fallback.
+- The Streamlit app has NOT been deployed yet. Demo mode is
+  code and tests only; the deploy click needs a signed-in
+  Streamlit account connected to GitHub, which is a parent step.
 - PDF rendering uses plain text, not Markdown, so development
   titles in the PDFs never show raw `**` markers. Verified by text
   extraction on all three live PDFs in Batch 1 (0 occurrences).
@@ -287,9 +375,15 @@ workflow scope to create it by push.
 python3 -m unittest discover -s tests -v
 ```
 
-23 tests, all offline: date parsing, window boundaries, old-result
+52 tests, all offline: date parsing, window boundaries, old-result
 filtering, deduplication, sorting, briefing formatting, empty
 results, a full fixture pipeline run, relevance-aware summary
-rules, and the Streamlit UI helpers (input validation and display
-shaping). The two Streamlit app import tests run only when
-Streamlit is installed, because it is an optional dependency.
+rules, the Streamlit UI helpers (input validation and display
+shaping), direct API key hygiene with mocked HTTP (200, 401,
+timeout retry, trimmed and empty keys), Tavily Extract parsing
+with mocked HTTP (results, failed_results, batching at 20,
+chunks cap, enrich top 8), and demo mode plus visitor-key
+handling. The two Streamlit app import tests run only when
+Streamlit is installed, because it is an optional dependency;
+with streamlit==1.67.0 installed, all 52 tests pass with
+0 skipped.

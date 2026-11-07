@@ -62,6 +62,7 @@ def filter_and_dedupe(raw: list, start: date, end: date):
             published=published,
             score=float(item.get("score") or 0.0),
             category=item.get("category", "news"),
+            full_content=item.get("full_content", "") or "",
         )
         key = normalise_url(url)
         if key in by_url:

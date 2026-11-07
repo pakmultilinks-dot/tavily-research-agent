@@ -68,6 +68,7 @@ def format_briefing_for_display(briefing) -> dict:
             "url": result.url,
             "date": result.published.isoformat() if result.published else "date unknown",
             "snippet": result.snippet,
+            "full_content": getattr(result, "full_content", "") or "",
             "category": result.category,
         })
     return {
