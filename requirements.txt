@@ -1,2 +1,5 @@
 requests>=2.31
 reportlab>=4.0
+# Optional, only for the Streamlit web UI (app.py).
+# The standard library web UI (web_ui.py) and the CLI work without it.
+streamlit>=1.30

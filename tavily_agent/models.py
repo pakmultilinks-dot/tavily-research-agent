@@ -41,4 +41,5 @@ class Briefing:
     dropped_duplicate_count: int = 0
     dropped_truncated_url_count: int = 0
     dropped_profile_count: int = 0
+    summary_excluded_count: int = 0
     source_note: str = ""

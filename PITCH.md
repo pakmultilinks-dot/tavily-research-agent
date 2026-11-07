@@ -18,7 +18,7 @@ and source links, discussion points, and open questions.
 
 Demo flow for judges:
 
-1. Open the CLI or web UI.
+1. Open the CLI, the standard library web UI, or the Streamlit web UI (app.py).
 2. Enter a real company name and a meeting date.
 3. Show the four Tavily searches running (news, launches, hires, funding).
 4. Show the briefing: newest first, duplicates removed, old results dropped.
@@ -33,12 +33,13 @@ route is still unproven (401), see STATUS.md.
 
 ## 3. Technical architecture
 
-Input (CLI or stdlib web UI)
+Input (CLI, stdlib web UI, or Streamlit web UI, all one pipeline)
 -> Tavily Search API: POST https://api.tavily.com/search, Bearer auth,
 topic=news, time_range=month, start_date and end_date for the 30-day window
 -> Date parsing (ISO and RFC/GMT), window filter, URL deduplication, sorting
--> Extractive summary, optional LLM summary only if LLM_API_KEY is set
+-> Relevance-aware extractive summary, optional LLM summary only if LLM_API_KEY is set
 -> Markdown and PDF output
+-> GitHub Actions CI runs the unit tests on Python 3.12, on push and pull request
 
 Key design choices:
 
@@ -48,6 +49,12 @@ Key design choices:
 - Undated results are flagged, never given an invented date.
 - Empty results produce an explicit "no results" briefing, not a
   made-up briefing.
+- The summary is relevance-aware: a development is quoted in the
+  Top findings only when the subject name appears in both its title
+  and its snippet. Other kept developments stay listed in full,
+  with source links. This removed an off-topic Learjet crash
+  snippet from the Google summary and an OpenAI hires article from
+  the Microsoft summary, without dropping any kept development.
 - No key is hardcoded. Tavily key comes only from TAVILY_API_KEY.
 
 ## 4. Working prototype
@@ -55,18 +62,24 @@ Key design choices:
 What exists now, locally, tested:
 
 - CLI that builds a briefing from fixtures end to end
-- Web UI that builds the same briefing from fixtures
-- 12 offline unit tests, all passing
+- Standard library web UI and Streamlit web UI (app.py) that build
+  the same briefing from fixtures, through the same pipeline
+- 23 offline unit tests, all passing
 - Sample briefing in Markdown and PDF in examples/
 - Live briefings from real Tavily Playground data, Nov 5, 2026:
   OpenAI 14 kept, Google 15 kept, Microsoft 8 kept, 37 of 60
   results, in examples/live-openai/, examples/live-google/, and
-  examples/live-microsoft/, Markdown and PDF each
+  examples/live-microsoft/, Markdown and PDF each, with a
+  relevance-aware summary (Batch 1, Nov 7, 2026)
+- Demo video, 117.3 seconds, 1080p, live briefings only
+- Public GitHub repo, branch main, with GitHub Actions CI
+- Hackathon submission: submitted for evaluation Nov 5, 2026,
+  Under Review, locked, cannot be edited. The repo stays open for
+  improvements, and judges clicking the repo link see the latest
+  version.
 
 What is NOT done yet:
 
-- Demo video
-- Public GitHub push and final hackathon submission
 - A proven direct API run (live_briefing.py still returns 401
   from this environment; the Playground briefings prove the
   pipeline on real Tavily data, not the API client route)
@@ -77,6 +90,8 @@ See STATUS.md for the exact remaining steps.
 
 Tavily Search for real-time research and ranking. Extractive
 summarisation by default, so the summary cannot invent facts.
+The summary is relevance-aware: only developments that name the
+subject in both title and snippet are quoted in the Top findings.
 Optional LLM summarisation only on supplied snippets, with fallback
 to extractive on any failure, and the mode labelled in the briefing.
 

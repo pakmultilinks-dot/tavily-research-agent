@@ -265,3 +265,59 @@ on top of the same pipeline without changing the core logic.
 - NOT pushed to GitHub yet in this task. The parent will push the
   video after verifying it, then it can be added to the saved
   HackCulture submission via Edit before the final submit.
+
+## Batch 1 improvements, 2026-11-07 (NOT pushed yet)
+
+- Streamlit web UI added: app.py, plus framework-free helpers in
+  tavily_agent/ui_helpers.py (input validation, display shaping,
+  shared briefing builder call). It reuses exactly the same
+  tavily_agent pipeline as the CLI and web_ui.py, no new pipeline
+  logic. Mock mode uses fixtures, live mode needs TAVILY_API_KEY.
+  It shows the briefing, source links, kept and dropped counts,
+  and the honest Playground/API limitation note, with Markdown and
+  PDF download buttons. Verified: app.py imports cleanly with
+  Streamlit 1.67.0 installed, and a Streamlit server started and
+  answered HTTP 200 on the local port. Run: streamlit run app.py.
+  requirements.txt lists streamlit as optional; web_ui.py still
+  works without it.
+- PDF bold rendering check: text extraction (pdftotext) on all
+  three live PDFs found 0 occurrences of `**`, before and after
+  the Batch 1 rebuild. The PDF renderer already uses plain text,
+  not Markdown. The `**` markers seen in the demo video came from
+  the on-screen Markdown list in scene 4, not from the PDFs. No
+  briefing files were changed for this check alone.
+- Relevance-aware summary: a development is quoted in the Top
+  findings only when the subject name appears in both its title
+  and its snippet (case-insensitive, subject string only, no short
+  forms). Other kept developments stay listed in full, with source
+  links, and each briefing notes how many were left out of the
+  summary. Excluded from the summary: OpenAI 4, Google 11,
+  Microsoft 4. Kept counts unchanged: OpenAI 14, Google 15,
+  Microsoft 8. The Learjet crash snippet is gone from the Google
+  summary, and the OpenAI hires article is gone from the Microsoft
+  summary. Most exclusions are driven by truncated Playground
+  snippets that do not name the subject even when the title does.
+  Full record: LIVE_TEST.md, "Relevance-aware summary, Batch 1,
+  2026-11-07".
+- GitHub Actions CI added: .github/workflows/ci.yml runs the unit
+  tests on Python 3.12, on push and pull request.
+- Pitch deck rebuilt from build_pitch_deck.py (new script, one
+  slide list for both formats): pitch-deck.pdf (10 pages) and
+  pitch-deck.pptx (10 slides). The old deck text was wrong in
+  three places: it said the input was the standard library UI
+  only, it said 12 tests, and its last slide listed the demo
+  video, GitHub push, and submission as next steps, all now done.
+  The rebuilt deck says Streamlit UI, 23 tests, and that the
+  submission is Under Review since Nov 5, 2026, with the repo open
+  for improvements until judging Nov 29, 2026. The submitted
+  HackCulture deck file is locked and is not changed by this.
+- Unit tests: 23 run, 23 passed (12 original plus 11 new: relevance
+  rules, extractive summary with subject, Streamlit UI helpers,
+  app import and pipeline use). The two app import tests run only
+  when Streamlit is installed.
+- Honest limits, unchanged: the direct API route still returns
+  HTTP 401 with the stored credential, so live_briefing.py is
+  still unproven. Playground snippets are still truncated at
+  about 100 characters.
+- NOT pushed to GitHub yet in this task. The parent will push the
+  Batch 1 changes after verifying them.

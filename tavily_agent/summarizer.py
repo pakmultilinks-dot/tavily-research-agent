@@ -17,11 +17,18 @@ import os
 
 import requests
 
-from .briefing import first_sentence
+from .briefing import first_sentence, summary_eligible_results
 
 
-def extractive_summary(results) -> str:
-    sentences = [first_sentence(r.snippet) for r in results[:3]]
+def extractive_summary(results, subject: str = "") -> str:
+    """First sentences of the top 3 summary-eligible snippets.
+
+    When a subject is given, only developments that name the subject
+    in both title and snippet are used (see mentions_subject in
+    briefing.py). Without a subject, the top 3 results are used,
+    which is the previous behaviour."""
+    pool = summary_eligible_results(results, subject) if subject else list(results)
+    sentences = [first_sentence(r.snippet) for r in pool[:3]]
     return " ".join(s for s in sentences if s)
 
 

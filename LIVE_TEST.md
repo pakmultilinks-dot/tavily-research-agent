@@ -425,3 +425,107 @@ Microsoft 8 kept, files listed above). NOT pushed to GitHub.
 NOT submitted to HackCulture. No demo video yet. Nothing deleted
 except the overwrite of the empty Nov 4 OpenAI briefing files
 with the real OpenAI briefing, recorded above.
+
+## Relevance-aware summary, Batch 1, 2026-11-07
+
+### Rule
+
+A kept development is quoted in the summary Top findings only when
+the subject name appears in BOTH its title and its snippet
+(case-insensitive, subject string only). A short form or a parent
+company name does not count: "Alphabet" does not count as a mention
+of "Google". The rule is implemented in tavily_agent/briefing.py
+(mentions_subject and summary_eligible_results) and in
+tavily_agent/summarizer.py (extractive_summary with a subject
+argument). Discussion points and open questions still use all kept
+developments, as before; only the summary Top findings changed.
+
+Why both title and snippet: the summary quotes the first sentence
+of the snippet, so a title that names the subject is not enough
+when the quoted snippet does not. The Google briefing proved it:
+its top finding was a snippet about a Learjet crash under a title
+that did name Google.
+
+### Excluded from the summary, per company (kept counts unchanged)
+
+OpenAI: kept 14, excluded 4.
+- "OpenAI hones public sector focus with new leadership hires -
+  Yvette Kirk | LinkedIn" (snippet does not name OpenAI)
+- "Introducing the Grid Protectors Program" (neither title nor
+  snippet names OpenAI)
+- "OpenAI Funding Round: $30B at $1.25T Value [2026]" (snippet
+  does not name OpenAI)
+- "OpenAI Updates ChatGPT Ads Manager with Daily Budgets Tool"
+  (snippet does not name OpenAI)
+
+Google: kept 15, excluded 11.
+- "Seattle's Ai2 lands $5 million Google grant for climate modeling"
+  (snippet does not name Google)
+- "Google will cut off search access for students at schools that
+  reject AI tools" (snippet is about a Learjet crash, does not
+  name Google)
+- "Google.org funds AI tools for teachers" (snippet does not name
+  Google)
+- "The latest AI-powered martech news and releases" (neither names
+  Google)
+- "How Salesforce Gets Business Leaders to Hire Ahead with Nicole
+  Pruner" (title does not name Google)
+- "Choosing Your First Leadership Hire: 18 Questions To Ask"
+  (neither names Google)
+- "GOOGLE NEWS US: Three news items about Bullying Sin Fronteras"
+  (snippet does not name Google)
+- "How Google's Rule of Four Can Streamline Executive Searches"
+  (snippet does not name Google)
+- "Enablement Leader, Google Public Sector - Google Careers"
+  (snippet does not name Google)
+- "Alphabet president Ruth Porat on how Google is funding AI to
+  win long term" (snippet names Alphabet, not Google)
+- "Google launches Gemini AI workplace agent that can write code
+  and run tasks" (snippet does not name Google)
+
+Microsoft: kept 8, excluded 4.
+- "OpenAI hones public sector focus with new leadership hires -
+  Nextgov/FCW" (neither title nor snippet names Microsoft)
+- "Atul Sehgal - Source Asia" (neither names Microsoft)
+- "AI Bond Funding Might Change The Case For Investing In
+  Microsoft (MSFT)" (snippet does not name Microsoft)
+- "Global health nonprofit PATH elevates its security and protects
+  private data with Microsoft" (snippet does not name Microsoft)
+
+### Verification
+
+- Rebuilt with python3 build_playground_briefings.py. Kept counts
+  unchanged: OpenAI 14, Google 15, Microsoft 8, total 37.
+  Dropped counts unchanged: old 0, duplicates 2, truncated URL 16,
+  profile 5. No development title, URL, date, or snippet was
+  changed, and no kept development was dropped.
+- New Google Top findings: CBS "Google to end search access for
+  schools that block its AI tools", Citi hires Google's director
+  of engineering, Google shopping updates. The Learjet crash
+  snippet is no longer in the Google summary.
+- New Microsoft Top findings: Edge opens 15 percent faster, $25
+  billion debt raise, buyouts to 60,000 workers. The OpenAI hires
+  article is no longer in the Microsoft summary.
+- OpenAI Top findings unchanged (Pierre acquisition, Hazelbaker
+  appointment, Nextgov hires), because its top 3 already named
+  OpenAI in both title and snippet.
+- Each rebuilt briefing notes its exclusion count in the Summary
+  section, and the excluded developments stay in Key developments
+  in full, with source links.
+- Most exclusions are driven by the truncated Playground snippets,
+  which often do not name the subject even when the title does.
+  That is a limit of the truncated source data, not a judgement
+  that the developments are irrelevant.
+
+### PDF bold rendering check, Batch 1, 2026-11-07
+
+- Text extraction (pdftotext) on all three live PDFs found 0
+  occurrences of `**`, before and after the rebuild. The PDF
+  renderer already uses plain text, not Markdown, so titles in the
+  PDFs never show raw `**` markers. The `**` markers seen in the
+  demo video came from the on-screen Markdown list in scene 4,
+  not from the PDFs. No briefing file was changed for this check.
+- Smoke check after the rebuild: all three PDFs start with
+  %PDF-1.4, every kept URL in each Markdown appears in its PDF
+  (OpenAI 14, Google 15, Microsoft 8), and no `**` appears in
+  extracted PDF text.

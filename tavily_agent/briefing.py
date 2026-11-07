@@ -92,6 +92,27 @@ def first_sentence(text: str) -> str:
     return sentence[:300]
 
 
+def mentions_subject(result, subject: str) -> bool:
+    """True only when the subject name appears in BOTH the title and
+    the snippet (case-insensitive, subject string only, no short
+    forms or parent company names). A development is eligible for
+    the Top findings in the summary only when this is true. This
+    matters because some returned snippets are boilerplate or
+    off-topic next to their titles, for example a snippet about an
+    unrelated crash under a title that does name the subject. Such
+    a development stays in Key developments in full, with its source
+    link, but its snippet is not quoted in the summary."""
+    name = (subject or "").strip().lower()
+    if not name:
+        return True
+    return name in (result.title or "").lower() and name in (result.snippet or "").lower()
+
+
+def summary_eligible_results(results, subject: str) -> list:
+    """Kept developments eligible for the summary Top findings."""
+    return [r for r in results if mentions_subject(r, subject)]
+
+
 def build_briefing(subject: str, meeting: date, raw: list,
                    mode: str = "mock", summary_mode: str = "extractive",
                    today: date | None = None) -> Briefing:
@@ -126,7 +147,9 @@ def build_briefing(subject: str, meeting: date, raw: list,
         f"{n} {CATEGORY_LABELS.get(cat, cat).lower()}"
         for cat, n in sorted(counts.items())
     )
-    top_snippets = [first_sentence(r.snippet) for r in kept[:3]]
+    eligible = summary_eligible_results(kept, subject)
+    summary_excluded = len(kept) - len(eligible)
+    top_snippets = [first_sentence(r.snippet) for r in eligible[:3]]
     top_snippets = [s for s in top_snippets if s]
     summary = (
         f"Found {len(kept)} result(s) for '{subject}' in the "
@@ -134,6 +157,11 @@ def build_briefing(subject: str, meeting: date, raw: list,
     )
     if top_snippets:
         summary += "Top findings: " + " ".join(top_snippets)
+    else:
+        summary += (
+            "No top finding names the subject directly in both its "
+            "title and snippet; see Key developments below."
+        )
 
     discussion_points = []
     for result in kept[:5]:
@@ -170,4 +198,5 @@ def build_briefing(subject: str, meeting: date, raw: list,
         summary_mode=summary_mode,
         dropped_old_count=dropped_old,
         dropped_duplicate_count=dropped_dup,
+        summary_excluded_count=summary_excluded,
     )

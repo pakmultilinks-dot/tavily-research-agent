@@ -10,7 +10,9 @@ LIVE via Tavily Playground, Nov 5, 2026. This briefing is built from 20 Tavily S
 
 ## Summary
 
-Found 15 result(s) for 'Google' in the window 2026-10-06 to 2026-11-05 (3 funding, deals and partnerships, 5 hires and leadership, 4 launches and product updates, 3 news). Top findings: Unlock URL Order Reprints Gift this Article Image 1: Northlake Commons b... ## Parents and 2 young children among victims of Learjet crash in Florida, family says ... Watch CBS News # Google to end search access for schools that block its AI tools, spar...
+Found 15 result(s) for 'Google' in the window 2026-10-06 to 2026-11-05 (3 funding, deals and partnerships, 5 hires and leadership, 4 launches and product updates, 3 news). Top findings: Watch CBS News # Google to end search access for schools that block its AI tools, spar... Key insight: Citi has hired Google's director of engineering to oversee development of ag... Google launched some interesting new shopping products last week, which could have an imp...
+
+Note: 11 kept development(s) below are not in the Top findings above, because the subject name does not appear in both their title and snippet. They are still listed in full, with source links, in Key developments.
 
 ## Key developments
 

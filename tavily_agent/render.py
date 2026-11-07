@@ -29,6 +29,15 @@ def render_markdown(b: object) -> str:
     lines.append("")
     lines.append(b.summary)
     lines.append("")
+    excluded = getattr(b, "summary_excluded_count", 0)
+    if excluded:
+        lines.append(
+            f"Note: {excluded} kept development(s) below are not in the "
+            "Top findings above, because the subject name does not appear "
+            "in both their title and snippet. They are still listed in "
+            "full, with source links, in Key developments."
+        )
+        lines.append("")
     if not b.results:
         lines.append("## Key developments")
         lines.append("")
@@ -106,6 +115,14 @@ def render_pdf(b: object, path: str) -> str:
         para(b.source_note)
     para("Summary", "Heading2")
     para(b.summary)
+    excluded = getattr(b, "summary_excluded_count", 0)
+    if excluded:
+        para(
+            f"Note: {excluded} kept development(s) below are not in the "
+            "Top findings above, because the subject name does not appear "
+            "in both their title and snippet. They are still listed in "
+            "full, with source links, in Key developments."
+        )
     para("Key developments", "Heading2")
     if not b.results:
         para("No verified developments in this window. Nothing is listed here on purpose.")

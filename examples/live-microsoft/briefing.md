@@ -10,7 +10,9 @@ LIVE via Tavily Playground, Nov 5, 2026. This briefing is built from 20 Tavily S
 
 ## Summary
 
-Found 8 result(s) for 'Microsoft' in the window 2026-10-06 to 2026-11-05 (3 funding, deals and partnerships, 2 hires and leadership, 1 launches and product updates, 2 news). Top findings: Peter Guerra will serve as OpenAI’s head of tech success. He leads a high-performing team of consultants and technical experts, delivering solution... Microsoft's Windows 11 update accelerates subsequent Edge launches when the browser is al...
+Found 8 result(s) for 'Microsoft' in the window 2026-10-06 to 2026-11-05 (3 funding, deals and partnerships, 2 hires and leadership, 1 launches and product updates, 2 news). Top findings: Microsoft's Windows 11 update accelerates subsequent Edge launches when the browser is al... Microsoft will access additional funding sources to complement its own cash flow generati... Watch CBS News # Microsoft offers buyouts to 60,000 workers as it pours money into AI
+
+Note: 4 kept development(s) below are not in the Top findings above, because the subject name does not appear in both their title and snippet. They are still listed in full, with source links, in Key developments.
 
 ## Key developments
 

@@ -28,13 +28,13 @@ clearly and lists nothing.
 ## Architecture
 
 ```
-User input (CLI or web UI)
+User input (CLI, standard library web UI, or Streamlit web UI)
   -> Tavily Search API, 4 category queries, last 30 days
   -> Parse published_date (ISO and RFC/GMT formats)
   -> Filter: drop dated results outside the window
   -> Deduplicate by normalised URL (www and trailing slash ignored)
   -> Sort: newest first, undated last and flagged "date unknown"
-  -> Summarise: extractive fallback, or LLM only if LLM_API_KEY is set
+  -> Summarise: relevance-aware extractive fallback, or LLM only if LLM_API_KEY is set
   -> Render: Markdown and PDF, same content
 ```
 
@@ -42,15 +42,19 @@ Files:
 
 - `main.py`: CLI entry point
 - `web_ui.py`: simple web UI, Python standard library only, no extra framework
+- `app.py`: Streamlit web UI, same pipeline, optional (needs `streamlit`)
 - `tavily_agent/dates.py`: date parsing and the 30-day window
 - `tavily_agent/tavily_client.py`: Tavily API client
 - `tavily_agent/briefing.py`: filter, dedupe, sort, briefing builder
 - `tavily_agent/summarizer.py`: extractive fallback plus optional LLM summary
+- `tavily_agent/ui_helpers.py`: shared input validation and display shaping for both web UIs
 - `tavily_agent/render.py`: Markdown and PDF rendering
 - `live_briefing.py`: live runner, reuses the same pipeline
 - `build_playground_briefings.py`: builds the live briefings from the
   transcribed Tavily Playground results in `examples/live-playground-2026-11-05.json`
-- `tests/test_briefing.py`: offline unit tests
+- `build_pitch_deck.py`: rebuilds the pitch deck (PDF and PPTX) from one slide list
+- `.github/workflows/ci.yml`: GitHub Actions, runs the unit tests on Python 3.12
+- `tests/test_briefing.py` and `tests/test_streamlit_ui.py`: offline unit tests
 - `examples/fixtures.json`: clearly labelled test fixtures, NOT real data
 - `examples/sample_briefing.md` and `examples/sample_briefing.pdf`: sample output from fixtures
 - `examples/live-openai/`, `examples/live-google/`, `examples/live-microsoft/`:
@@ -62,10 +66,11 @@ Files:
 pip install -r requirements.txt
 ```
 
-Requirements are only `requests` and `reportlab`. The web UI uses
-only the Python standard library, so it runs without Streamlit or
-FastAPI. That choice was made for robustness: fewer dependencies,
-fewer ways for the demo to fail.
+Requirements are `requests` and `reportlab`, plus `streamlit` as an
+optional dependency for the Streamlit web UI only. The standard
+library web UI and the CLI run without Streamlit. That choice was
+made for robustness: fewer dependencies, fewer ways for the demo
+to fail.
 
 ## Run, mock mode (no key, no network)
 
@@ -119,6 +124,20 @@ truncation note:
 - `examples/live-google/briefing.md` and `briefing.pdf` (15 kept)
 - `examples/live-microsoft/briefing.md` and `briefing.pdf` (8 kept)
 
+Relevance-aware summary (Batch 1, Nov 7, 2026): the Top findings
+in each summary now use only developments that name the subject
+in both their title and snippet. Developments that do not are
+still listed in full, with source links, in Key developments, and
+the briefing notes how many were left out of the summary: OpenAI
+4, Google 11, Microsoft 4. Kept counts did not change (14, 15, 8).
+This removed two off-topic snippets from the summaries: the
+Learjet crash snippet from the Google summary, and the OpenAI
+hires article from the Microsoft summary. The exclusions are
+mostly driven by the truncated Playground snippets, which often
+do not name the subject even when the title does. Full record:
+`LIVE_TEST.md`, section "Relevance-aware summary, Batch 1,
+2026-11-07".
+
 Reproduce the live briefings from the transcribed results:
 
 ```bash
@@ -142,6 +161,8 @@ Full record: `LIVE_TEST.md`, section "LIVE VIA PLAYGROUND
 
 ## Run, web UI
 
+Standard library UI (no extra framework):
+
 ```bash
 python3 web_ui.py --port 8000
 ```
@@ -150,6 +171,21 @@ Then open http://127.0.0.1:8000 in a browser. Tick "Mock mode" to
 use fixtures, or leave it unticked for live mode (needs
 `TAVILY_API_KEY` set when the server starts).
 
+Streamlit UI (needs `streamlit`, same pipeline, same briefings):
+
+```bash
+streamlit run app.py
+```
+
+Then open the local URL Streamlit prints (usually
+http://localhost:8501). Enter a company or person and a meeting
+date, tick "Mock mode" for fixtures or leave it unticked for live
+mode, and press "Build briefing". The briefing shows the summary,
+kept and dropped counts, every development with its source link,
+discussion points, open questions, and Markdown and PDF download
+buttons. Both web UIs share the input validation and display
+helpers in `tavily_agent/ui_helpers.py`.
+
 ## How AI is used
 
 - Tavily Search is the research layer: it finds and ranks real web
@@ -157,6 +193,12 @@ use fixtures, or leave it unticked for live mode (needs
 - Summarisation is extractive by default: the summary reuses the
   first sentence of the top result snippets and counts results by
   category. No new facts are created.
+- The summary is relevance-aware: a development is quoted in the
+  Top findings only when the subject name appears in both its
+  title and its snippet (case-insensitive, subject string only).
+  Other kept developments stay in Key developments in full, with
+  source links, and the briefing notes how many were left out of
+  the summary.
 - An LLM summary is used only if `LLM_API_KEY` is set. It is given
   only the supplied snippets and is told not to invent dates, facts,
   or sources. Any LLM failure falls back to the extractive summary,
@@ -213,6 +255,11 @@ future developments cannot be searched yet. Example: a meeting on
   Playground. The Nov 5 live briefings above prove the pipeline on
   real Tavily data gathered in the Playground, not the direct API
   client route. See STATUS.md and LIVE_TEST.md.
+- PDF rendering uses plain text, not Markdown, so development
+  titles in the PDFs never show raw `**` markers. Verified by text
+  extraction on all three live PDFs in Batch 1 (0 occurrences).
+  The `**` markers seen in the demo video came from the on-screen
+  Markdown list in one scene, not from the PDFs.
 - If Tavily returns no published_date for a result, the briefing
   keeps it but flags it "date unknown". Its date could not be
   verified from Tavily alone, and the briefing says so.
@@ -227,8 +274,9 @@ future developments cannot be searched yet. Example: a meeting on
 ## Technologies
 
 Python 3.12, requests, reportlab for PDF, Python standard library
-for the web UI and tests. No database, no paid service beyond the
-Tavily API itself.
+for the web UI and tests, Streamlit as an optional UI, GitHub
+Actions for CI (unit tests on Python 3.12, on push and pull
+request). No database, no paid service beyond the Tavily API itself.
 
 ## Tests
 
@@ -236,6 +284,9 @@ Tavily API itself.
 python3 -m unittest discover -s tests -v
 ```
 
-12 tests, all offline: date parsing, window boundaries, old-result
+23 tests, all offline: date parsing, window boundaries, old-result
 filtering, deduplication, sorting, briefing formatting, empty
-results, and a full fixture pipeline run.
+results, a full fixture pipeline run, relevance-aware summary
+rules, and the Streamlit UI helpers (input validation and display
+shaping). The two Streamlit app import tests run only when
+Streamlit is installed, because it is an optional dependency.

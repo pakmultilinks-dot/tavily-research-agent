@@ -12,6 +12,8 @@ LIVE via Tavily Playground, Nov 5, 2026. This briefing is built from 20 Tavily S
 
 Found 14 result(s) for 'OpenAI' in the window 2026-10-06 to 2026-11-05 (3 funding, deals and partnerships, 3 hires and leadership, 4 launches and product updates, 4 news). Top findings: Today we're announcing that OpenAI will acquire Pierre Computer Company, Inc(opens in a new window). Image 3: David Vélez and Robin Vince 1x1 David Vélez and Robin Vince join OpenAI boards Company Jul OpenAI hired Yvette Cesario to be its new head of national security.
 
+Note: 4 kept development(s) below are not in the Top findings above, because the subject name does not appear in both their title and snippet. They are still listed in full, with source links, in Key developments.
+
 ## Key developments
 
 ### Funding, deals and partnerships
