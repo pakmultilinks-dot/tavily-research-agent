@@ -39,7 +39,7 @@ topic=news, time_range=month, start_date and end_date for the 30-day window
 -> Date parsing (ISO and RFC/GMT), window filter, URL deduplication, sorting
 -> Relevance-aware extractive summary, optional LLM summary only if LLM_API_KEY is set
 -> Markdown and PDF output
--> GitHub Actions CI runs the unit tests on Python 3.12, on push and pull request
+-> GitHub Actions CI workflow file ready locally, pending web upload (command line token lacks workflow scope)
 
 Key design choices:
 
@@ -72,7 +72,7 @@ What exists now, locally, tested:
   examples/live-microsoft/, Markdown and PDF each, with a
   relevance-aware summary (Batch 1, Nov 7, 2026)
 - Demo video, 117.3 seconds, 1080p, live briefings only
-- Public GitHub repo, branch main, with GitHub Actions CI
+- Public GitHub repo, branch main, with CI workflow file ready locally
 - Hackathon submission: submitted for evaluation Nov 5, 2026,
   Under Review, locked, cannot be edited. The repo stays open for
   improvements, and judges clicking the repo link see the latest

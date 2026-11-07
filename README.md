@@ -274,9 +274,12 @@ future developments cannot be searched yet. Example: a meeting on
 ## Technologies
 
 Python 3.12, requests, reportlab for PDF, Python standard library
-for the web UI and tests, Streamlit as an optional UI, GitHub
-Actions for CI (unit tests on Python 3.12, on push and pull
-request). No database, no paid service beyond the Tavily API itself.
+for the web UI and tests, Streamlit as an optional UI. No database,
+no paid service beyond the Tavily API itself. A GitHub Actions CI
+workflow file is ready locally at .github/workflows/ci.yml (unit
+tests on Python 3.12, on push and pull request), pending upload
+via the GitHub web UI, because the command line token lacks the
+workflow scope to create it by push.
 
 ## Tests
 

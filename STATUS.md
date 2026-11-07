@@ -299,8 +299,11 @@ on top of the same pipeline without changing the core logic.
   snippets that do not name the subject even when the title does.
   Full record: LIVE_TEST.md, "Relevance-aware summary, Batch 1,
   2026-11-07".
-- GitHub Actions CI added: .github/workflows/ci.yml runs the unit
-  tests on Python 3.12, on push and pull request.
+- GitHub Actions CI workflow file ready locally:
+  .github/workflows/ci.yml runs the unit tests on Python 3.12,
+  on push and pull request. It is NOT on GitHub yet, because the
+  command line token lacks the workflow scope to create it by
+  push, so it will be added via the GitHub web UI.
 - Pitch deck rebuilt from build_pitch_deck.py (new script, one
   slide list for both formats): pitch-deck.pdf (10 pages) and
   pitch-deck.pptx (10 slides). The old deck text was wrong in
